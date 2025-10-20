@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:ngam_plan/features/events/view/events_view.dart';
 import 'package:ngam_plan/features/home/view/home_screen.dart';
@@ -34,6 +33,11 @@ class _BaseScreenState extends State<BaseScreen> {
         label: AppLocalizations.of(context)!.eventsSectionTitle,
         view: const EventsView(),
       ),
+      NavBarItem(
+        icon: AppIcons.settings,
+        label: AppLocalizations.of(context)!.settingsSectionTitle,
+        view: const SettingsView(),
+      ),
     ];
   }
 
@@ -46,17 +50,6 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(AppLocalizations.of(context)!.appTitle),
-        actions: [
-          IconButton(
-            icon: const Icon(AppIcons.settings),
-            onPressed: () {
-              Navigator.of(context).pushNamed(SettingsView.routeName);
-            },
-          ),
-        ],
-      ),
       body: Center(
         child: navbarItems[_selectedIndex].view,
       ),

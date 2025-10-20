@@ -3,6 +3,16 @@
   "@appTitle": {
     "description": "The title of the application"
   },
+  "eventsSectionTitle": "Events",
+  "@eventsSectionTitle": {
+    "description": "Title for the events section"
+  },
   "homeSectionTitle": "Home",
-  "eventsSectionTitle": "Events"
+  "@homeSectionTitle": {
+    "description": "Title for the home section"
+  },
+  "settingsSectionTitle": "Settings",
+  "@settingsSectionTitle": {
+    "description": "Title for the settings section"
+  }
 }

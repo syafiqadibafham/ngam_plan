@@ -12,8 +12,11 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Ngam plan';
 
   @override
+  String get eventsSectionTitle => 'Events';
+
+  @override
   String get homeSectionTitle => 'Home';
 
   @override
-  String get eventsSectionTitle => 'Events';
+  String get settingsSectionTitle => 'Settings';
 }

@@ -100,17 +100,23 @@ abstract class AppLocalizations {
   /// **'Ngam plan'**
   String get appTitle;
 
-  /// No description provided for @homeSectionTitle.
+  /// Title for the events section
+  ///
+  /// In en, this message translates to:
+  /// **'Events'**
+  String get eventsSectionTitle;
+
+  /// Title for the home section
   ///
   /// In en, this message translates to:
   /// **'Home'**
   String get homeSectionTitle;
 
-  /// No description provided for @eventsSectionTitle.
+  /// Title for the settings section
   ///
   /// In en, this message translates to:
-  /// **'Events'**
-  String get eventsSectionTitle;
+  /// **'Settings'**
+  String get settingsSectionTitle;
 }
 
 class _AppLocalizationsDelegate

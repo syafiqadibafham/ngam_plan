@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ngam_plan/features/settings/cubit/settings_cubit.dart';
 import 'package:ngam_plan/features/settings/cubit/settings_state.dart';
+import 'package:ngam_plan/src/localization/app_localizations.dart';
+import 'package:ngam_plan/src/widgets/app_screen.dart';
 
 /// Displays the various settings that can be customized by the user.
 ///
@@ -14,11 +16,9 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Settings'),
-      ),
-      body: Padding(
+    return AppScreen(
+      title: AppLocalizations.of(context)!.settingsSectionTitle,
+      child: Padding(
         padding: const EdgeInsets.all(16),
         // Glue the SettingsController to the theme selection DropdownButton.
         //
