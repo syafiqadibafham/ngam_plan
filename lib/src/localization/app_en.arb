@@ -1,0 +1,8 @@
+{
+  "appTitle": "Ngam plan",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "homeSectionTitle": "Home",
+  "eventsSectionTitle": "Events"
+}
