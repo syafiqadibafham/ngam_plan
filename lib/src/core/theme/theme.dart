@@ -1,4 +1,4 @@
 export 'app_colors.dart';
 export 'app_icons.dart';
 export 'app_theme.dart';
-export 'app_ui_values.dart';
+export 'app_typography.dart';

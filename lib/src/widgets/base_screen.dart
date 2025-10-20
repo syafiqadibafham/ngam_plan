@@ -50,9 +50,8 @@ class _BaseScreenState extends State<BaseScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: navbarItems[_selectedIndex].view,
-      ),
+      extendBody: true,
+      body: navbarItems[_selectedIndex].view,
       bottomNavigationBar: NavBar(
         items: navbarItems,
         selectedIndex: _selectedIndex,
