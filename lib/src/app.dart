@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
+import 'package:ngam_plan/service_locator.dart';
 import 'package:ngam_plan/src/widgets/base_screen.dart';
 import 'package:ngam_plan/features/settings/cubit/settings_cubit.dart';
 import 'package:ngam_plan/features/settings/cubit/settings_state.dart';
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [
         BlocProvider(create: (context) => SettingsCubit()),
-        BlocProvider(create: (context) => EventsCubit()),
+        BlocProvider(create: (context) => getIt<EventsCubit>()),
       ],
       child: BlocBuilder<SettingsCubit, SettingsState>(
         builder: (context, state) {

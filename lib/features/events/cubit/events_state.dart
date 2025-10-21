@@ -1,19 +1,9 @@
-import 'package:equatable/equatable.dart';
-import 'package:ngam_plan/features/events/models/event_model.dart';
+part of 'events_cubit.dart';
 
-abstract class EventsState extends Equatable {
-  final List<Event> events;
-
-  const EventsState(this.events);
-
-  @override
-  List<Object> get props => [events];
-}
-
-class EventsInitial extends EventsState {
-  const EventsInitial() : super(const []);
-}
-
-class EventsLoaded extends EventsState {
-  const EventsLoaded(super.events);
+@freezed
+class EventsState with _$EventsState {
+  const factory EventsState.initial() = _Initial;
+  const factory EventsState.loading() = _Loading;
+  const factory EventsState.loaded(List<Event> events) = _Loaded;
+  const factory EventsState.error(String message) = _Error;
 }
