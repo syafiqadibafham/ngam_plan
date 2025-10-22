@@ -6,15 +6,17 @@ class MockEventRepository implements EventRepository {
   final List<Event> _events = [
     Event(
       id: '1',
-      name: 'John\'s Birthday',
-      date: DateTime(2024, 10, 26),
+      name: 'My Birthday',
+      date: DateTime(1997, 12, 18),
       type: EventType.birthday,
+      //imageUrl: 'https://picsum.photos/seed/picsum/200/300',
     ),
     Event(
       id: '2',
       name: 'Wedding Anniversary',
-      date: DateTime(2024, 12, 15),
+      date: DateTime(2024, 8, 24),
       type: EventType.anniversary,
+      imageUrl: "https://picsum.photos/200/300",
     ),
   ];
 

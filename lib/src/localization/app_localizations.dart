@@ -117,6 +117,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Settings'**
   String get settingsSectionTitle;
+
+  /// Title for the upcoming events section on the home screen
+  ///
+  /// In en, this message translates to:
+  /// **'Upcoming Events'**
+  String get upcomingEventsTitle;
+
+  /// Text to display when there are no upcoming events
+  ///
+  /// In en, this message translates to:
+  /// **'No upcoming events.'**
+  String get noUpcomingEvents;
+
+  /// Title for this month's events section on the home screen
+  ///
+  /// In en, this message translates to:
+  /// **'This month\'s Events'**
+  String get thisMonthsEventsTitle;
+
+  /// A placeholder for a generic item in a list
+  ///
+  /// In en, this message translates to:
+  /// **'Item {index}'**
+  String item(int index);
+
+  /// Indicates how many days have passed since an event
+  ///
+  /// In en, this message translates to:
+  /// **'{days} days ago'**
+  String daysAgo(int days);
+
+  /// Indicates the number of days until an event
+  ///
+  /// In en, this message translates to:
+  /// **'in {days} days'**
+  String inDays(int days);
+
+  /// Label for a yearly anniversary
+  ///
+  /// In en, this message translates to:
+  /// **'{years}-year anniversary'**
+  String yearAnniversary(int years);
+
+  /// Label for a 100-day anniversary milestone
+  ///
+  /// In en, this message translates to:
+  /// **'{days}-day anniversary'**
+  String dayAnniversary(int days);
 }
 
 class _AppLocalizationsDelegate

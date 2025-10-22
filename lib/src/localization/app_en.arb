@@ -14,5 +14,62 @@
   "settingsSectionTitle": "Settings",
   "@settingsSectionTitle": {
     "description": "Title for the settings section"
+  },
+  "upcomingEventsTitle": "Upcoming Events",
+  "@upcomingEventsTitle": {
+    "description": "Title for the upcoming events section on the home screen"
+  },
+  "noUpcomingEvents": "No upcoming events.",
+  "@noUpcomingEvents": {
+    "description": "Text to display when there are no upcoming events"
+  },
+  "thisMonthsEventsTitle": "This month's Events",
+  "@thisMonthsEventsTitle": {
+    "description": "Title for this month's events section on the home screen"
+  },
+  "item": "Item {index}",
+  "@item": {
+    "description": "A placeholder for a generic item in a list",
+    "placeholders": {
+      "index": {
+        "type": "int"
+      }
+    }
+  },
+  "daysAgo": "{days} days ago",
+  "@daysAgo": {
+    "description": "Indicates how many days have passed since an event",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "inDays": "in {days} days",
+  "@inDays": {
+    "description": "Indicates the number of days until an event",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
+  },
+  "yearAnniversary": "{years}-year anniversary",
+  "@yearAnniversary": {
+    "description": "Label for a yearly anniversary",
+    "placeholders": {
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "dayAnniversary": "{days}-day anniversary",
+  "@dayAnniversary": {
+    "description": "Label for a 100-day anniversary milestone",
+    "placeholders": {
+      "days": {
+        "type": "int"
+      }
+    }
   }
 }

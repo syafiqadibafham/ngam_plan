@@ -7,4 +7,5 @@ class AppIcons {
   static const IconData event = LucideIcons.calendar;
   static const IconData home = LucideIcons.house;
   static const IconData settings = LucideIcons.settings;
+  static const IconData timer = LucideIcons.timer;
 }

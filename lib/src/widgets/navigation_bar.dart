@@ -40,7 +40,7 @@ class _NavBarState extends State<NavBar> {
       ),
       isFloating: true,
       floatingMargin: EdgeInsets.symmetric(horizontal: 16.0, vertical: MediaQuery.of(context).viewPadding.bottom),
-      floatingBorderRadius: 20.0,
+      floatingBorderRadius: 35.0,
       items: widget.items.map((item) {
         return NavigationItem(
           iconWidget: Icon(
