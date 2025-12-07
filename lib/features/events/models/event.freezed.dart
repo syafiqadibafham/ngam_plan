@@ -21,6 +21,7 @@ mixin _$Event {
   DateTime get date => throw _privateConstructorUsedError;
   EventType get type => throw _privateConstructorUsedError;
   String? get imageUrl => throw _privateConstructorUsedError;
+  Color? get color => throw _privateConstructorUsedError;
 
   /// Create a copy of Event
   /// with the given fields replaced by the non-null parameter values.
@@ -38,7 +39,8 @@ abstract class $EventCopyWith<$Res> {
       String name,
       DateTime date,
       EventType type,
-      String? imageUrl});
+      String? imageUrl,
+      Color? color});
 }
 
 /// @nodoc
@@ -61,6 +63,7 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
     Object? date = null,
     Object? type = null,
     Object? imageUrl = freezed,
+    Object? color = freezed,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -83,6 +86,10 @@ class _$EventCopyWithImpl<$Res, $Val extends Event>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      color: freezed == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
     ) as $Val);
   }
 }
@@ -99,7 +106,8 @@ abstract class _$$EventImplCopyWith<$Res> implements $EventCopyWith<$Res> {
       String name,
       DateTime date,
       EventType type,
-      String? imageUrl});
+      String? imageUrl,
+      Color? color});
 }
 
 /// @nodoc
@@ -120,6 +128,7 @@ class __$$EventImplCopyWithImpl<$Res>
     Object? date = null,
     Object? type = null,
     Object? imageUrl = freezed,
+    Object? color = freezed,
   }) {
     return _then(_$EventImpl(
       id: null == id
@@ -142,6 +151,10 @@ class __$$EventImplCopyWithImpl<$Res>
           ? _value.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
+      color: freezed == color
+          ? _value.color
+          : color // ignore: cast_nullable_to_non_nullable
+              as Color?,
     ));
   }
 }
@@ -154,7 +167,8 @@ class _$EventImpl implements _Event {
       required this.name,
       required this.date,
       required this.type,
-      this.imageUrl});
+      this.imageUrl,
+      this.color});
 
   @override
   final String id;
@@ -166,10 +180,12 @@ class _$EventImpl implements _Event {
   final EventType type;
   @override
   final String? imageUrl;
+  @override
+  final Color? color;
 
   @override
   String toString() {
-    return 'Event(id: $id, name: $name, date: $date, type: $type, imageUrl: $imageUrl)';
+    return 'Event(id: $id, name: $name, date: $date, type: $type, imageUrl: $imageUrl, color: $color)';
   }
 
   @override
@@ -182,11 +198,13 @@ class _$EventImpl implements _Event {
             (identical(other.date, date) || other.date == date) &&
             (identical(other.type, type) || other.type == type) &&
             (identical(other.imageUrl, imageUrl) ||
-                other.imageUrl == imageUrl));
+                other.imageUrl == imageUrl) &&
+            (identical(other.color, color) || other.color == color));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, date, type, imageUrl);
+  int get hashCode =>
+      Object.hash(runtimeType, id, name, date, type, imageUrl, color);
 
   /// Create a copy of Event
   /// with the given fields replaced by the non-null parameter values.
@@ -203,7 +221,8 @@ abstract class _Event implements Event {
       required final String name,
       required final DateTime date,
       required final EventType type,
-      final String? imageUrl}) = _$EventImpl;
+      final String? imageUrl,
+      final Color? color}) = _$EventImpl;
 
   @override
   String get id;
@@ -215,6 +234,8 @@ abstract class _Event implements Event {
   EventType get type;
   @override
   String? get imageUrl;
+  @override
+  Color? get color;
 
   /// Create a copy of Event
   /// with the given fields replaced by the non-null parameter values.

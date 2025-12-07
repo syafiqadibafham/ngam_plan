@@ -1,3 +1,4 @@
+import 'package:flutter/services.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:ngam_plan/features/events/models/event_types.dart';
 
@@ -11,5 +12,6 @@ class Event with _$Event {
     required DateTime date,
     required EventType type,
     String? imageUrl,
+    Color? color,
   }) = _Event;
 }

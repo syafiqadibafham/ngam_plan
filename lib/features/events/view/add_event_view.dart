@@ -6,6 +6,7 @@ import 'package:ngam_plan/features/events/models/event.dart';
 import 'package:ngam_plan/features/events/models/event_types.dart';
 import 'package:ngam_plan/src/core/theme/app_typography.dart';
 import 'package:ngam_plan/src/widgets/app_screen.dart';
+import 'package:ngam_plan/src/widgets/text_input.dart';
 
 class AddEventView extends StatefulWidget {
   const AddEventView({super.key});
@@ -73,9 +74,9 @@ class _AddEventViewState extends State<AddEventView> {
           key: _formKey,
           child: Column(
             children: [
-              TextFormField(
+              TextInput(
                 controller: _nameController,
-                decoration: const InputDecoration(labelText: 'Event Name'),
+                labelText: 'Event Name',
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter an event name';

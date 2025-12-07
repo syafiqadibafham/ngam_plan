@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:ngam_plan/features/events/models/event.dart';
+import 'package:ngam_plan/features/events/models/event_extension.dart';
 import 'package:ngam_plan/src/core/theme/app_icons.dart';
 import 'package:ngam_plan/src/core/theme/app_typography.dart';
 import 'package:ngam_plan/src/utils/countdown_calculator.dart';
@@ -17,32 +18,27 @@ class EventHomeWidget extends StatelessWidget {
         alignment: AlignmentGeometry.centerLeft,
         children: [
           _Image(event.imageUrl),
-          Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        event.name,
-                        style: Theme.of(context).textTheme.headlineSmall,
-                      ),
-                      const SizedBox(height: 8),
-                      _TextWithIcon(
-                        CountdownCalculator.getCountdownString(event, context),
-                        icon: AppIcons.timer,
-                      ),
-                      _TextWithIcon(
-                        CountdownCalculator.getNextMilestoneDate(event).toLocal().toString().split(' ')[0],
-                        icon: AppIcons.event,
-                        color: Theme.of(context).colorScheme.onSecondary.withAlpha(100),
-                      ),
-                    ],
+          ListTile(
+            title: Text(
+              event.name,
+              style: Theme.of(context).textTheme.headlineSmall,
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.only(top: 10.0),
+              child: Column(
+                spacing: 4,
+                children: [
+                  _TextWithIcon(
+                    CountdownCalculator.getCountdownString(event, context),
+                    icon: AppIcons.timer,
                   ),
-                ),
-              ],
+                  _TextWithIcon(
+                    event.upcomingDate.toLocal().toString().split(' ')[0],
+                    icon: AppIcons.event,
+                    color: Theme.of(context).colorScheme.onSecondary.withAlpha(100),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

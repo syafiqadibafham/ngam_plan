@@ -62,5 +62,95 @@ void main() {
         ],
       );
     });
+
+    group('addEvent', () {
+      final event = Event(
+        id: '2',
+        name: 'New Event',
+        date: DateTime.now(),
+        type: EventType.general,
+      );
+      final events = [
+        Event(
+          id: '1',
+          name: 'Test Event',
+          date: DateTime.now(),
+          type: EventType.general,
+        ),
+        event,
+      ];
+
+      blocTest<EventsCubit, EventsState>(
+        'calls addEvent and then fetchEvents, emits [loading, loaded]',
+        build: () {
+          when(() => eventRepository.addEvent(event)).thenAnswer((_) async {});
+          when(() => eventRepository.getEvents()).thenAnswer((_) async => events);
+          return eventsCubit;
+        },
+        act: (cubit) => cubit.addEvent(event),
+        expect: () => [
+          const EventsState.loading(),
+          EventsState.loaded(events),
+        ],
+        verify: (_) {
+          verify(() => eventRepository.addEvent(event)).called(1);
+          verify(() => eventRepository.getEvents()).called(1);
+        },
+      );
+
+      blocTest<EventsCubit, EventsState>(
+        'emits [error] when addEvent throws an exception',
+        build: () {
+          when(() => eventRepository.addEvent(event)).thenThrow(Exception('Error'));
+          return eventsCubit;
+        },
+        act: (cubit) => cubit.addEvent(event),
+        expect: () => [
+          const EventsState.error('Exception: Error'),
+        ],
+      );
+    });
+
+    group('deleteEvent', () {
+      const eventId = '1';
+      final events = [
+        Event(
+          id: '2',
+          name: 'Another Event',
+          date: DateTime.now(),
+          type: EventType.general,
+        ),
+      ];
+
+      blocTest<EventsCubit, EventsState>(
+        'calls deleteEvent and then fetchEvents, emits [loading, loaded]',
+        build: () {
+          when(() => eventRepository.deleteEvent(eventId)).thenAnswer((_) async {});
+          when(() => eventRepository.getEvents()).thenAnswer((_) async => events);
+          return eventsCubit;
+        },
+        act: (cubit) => cubit.deleteEvent(eventId),
+        expect: () => [
+          const EventsState.loading(),
+          EventsState.loaded(events),
+        ],
+        verify: (_) {
+          verify(() => eventRepository.deleteEvent(eventId)).called(1);
+          verify(() => eventRepository.getEvents()).called(1);
+        },
+      );
+
+      blocTest<EventsCubit, EventsState>(
+        'emits [error] when deleteEvent throws an exception',
+        build: () {
+          when(() => eventRepository.deleteEvent(eventId)).thenThrow(Exception('Error'));
+          return eventsCubit;
+        },
+        act: (cubit) => cubit.deleteEvent(eventId),
+        expect: () => [
+          const EventsState.error('Exception: Error'),
+        ],
+      );
+    });
   });
 }
