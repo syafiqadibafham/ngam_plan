@@ -1,137 +1,102 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:ngam_plan/features/events/models/event.dart';
 import 'package:ngam_plan/features/events/models/event_extension.dart';
-import 'package:ngam_plan/src/core/theme/app_icons.dart';
-import 'package:ngam_plan/src/core/theme/app_typography.dart';
+import 'package:ngam_plan/src/core/theme/app_colors.dart';
 import 'package:ngam_plan/src/utils/countdown_calculator.dart';
+import 'package:ngam_plan/src/widgets/glass_widgets.dart';
 
 class EventHomeWidget extends StatelessWidget {
-  const EventHomeWidget({super.key, required this.event});
+  const EventHomeWidget({super.key, required this.event, this.onTap});
 
   final Event event;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return IntrinsicHeight(
-      child: Stack(
-        alignment: AlignmentGeometry.centerLeft,
-        children: [
-          _Image(event.imageUrl),
-          ListTile(
-            title: Text(
-              event.name,
-              style: Theme.of(context).textTheme.headlineSmall,
+    return GestureDetector(
+      onTap: onTap,
+      child: GlassContainer(
+        padding: const EdgeInsets.all(12),
+        borderRadius: BorderRadius.circular(16),
+        child: Row(
+          children: [
+            // Event Image
+            Hero(
+              tag: 'event_image_${event.id}',
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: SizedBox(
+                  width: 80,
+                  height: 80,
+                  child: event.imageUrl != null && event.imageUrl!.isNotEmpty
+                      ? CachedNetworkImage(
+                          imageUrl: event.imageUrl!,
+                          fit: BoxFit.cover,
+                          placeholder: (context, url) => Container(color: AppColors.glassSurface),
+                          errorWidget: (context, url, error) => const Icon(LucideIcons.image, color: AppColors.textDisabled),
+                        )
+                      : Container(
+                          color: AppColors.glassSurface,
+                          child: Icon(LucideIcons.calendar, color: AppColors.textDisabled),
+                        ),
+                ),
+              ),
             ),
-            subtitle: Padding(
-              padding: const EdgeInsets.only(top: 10.0),
+            const SizedBox(width: 16),
+            
+            // Event Details
+            Expanded(
               child: Column(
-                spacing: 4,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  _TextWithIcon(
-                    CountdownCalculator.getCountdownString(event, context),
-                    icon: AppIcons.timer,
+                  Text(
+                    event.name,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(fontSize: 16),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
-                  _TextWithIcon(
-                    event.upcomingDate.toLocal().toString().split(' ')[0],
-                    icon: AppIcons.event,
-                    color: Theme.of(context).colorScheme.onSecondary.withAlpha(100),
+                  const SizedBox(height: 6),
+                  
+                  // Date
+                  Row(
+                    children: [
+                      Icon(LucideIcons.calendarClock, size: 14, color: AppColors.secondary),
+                      const SizedBox(width: 4),
+                      Text(
+                        event.upcomingDate.toLocal().toString().split(' ')[0], // Simple date format
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: AppColors.textSecondary),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  
+                  // Countdown
+                  Row(
+                    children: [
+                      Icon(LucideIcons.hourglass, size: 14, color: AppColors.accentStart),
+                      const SizedBox(width: 4),
+                      Text(
+                        CountdownCalculator.getCountdownString(event, context),
+                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                          color: AppColors.accentStart,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
             ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _Image extends StatelessWidget {
-  const _Image(this.imageUrl);
-
-  final String? imageUrl;
-
-  bool get hasImage => imageUrl != null && imageUrl!.isNotEmpty;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: double.infinity,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        color: Theme.of(context).colorScheme.secondary,
-      ),
-      child: Row(
-        //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          const Expanded(child: SizedBox()),
-          AspectRatio(
-            aspectRatio: 3 / 2,
-            child: Stack(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.4,
-                    child: hasImage
-                        ? CachedNetworkImage(
-                            alignment: Alignment.centerRight,
-                            imageUrl: imageUrl!,
-                            fit: BoxFit.cover,
-                            placeholder: (context, url) => Container(color: Theme.of(context).colorScheme.error.withAlpha(100)),
-                            errorWidget: (context, url, error) => const Icon(Icons.error),
-                          )
-                        : const SizedBox(),
-                  ),
-                ),
-                if (hasImage)
-                  Container(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Theme.of(context).colorScheme.secondary,
-                          Theme.of(context).colorScheme.secondary.withAlpha(60),
-                          Colors.transparent,
-                        ],
-                      ),
-                    ),
-                  ),
-              ],
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _TextWithIcon extends StatelessWidget {
-  const _TextWithIcon(this.text, {required this.icon, this.color});
-
-  final String text;
-  final IconData icon;
-  final Color? color;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Icon(
-          icon,
-          size: 16,
-          color: color ?? Theme.of(context).colorScheme.onSecondary,
+            
+            // Arrow
+            Icon(LucideIcons.chevronRight, color: AppColors.textDisabled, size: 20),
+          ],
         ),
-        const SizedBox(width: 4),
-        Text(
-          text,
-          style: Theme.of(context).textTheme.bodyMedium!.withColor(
-                color ?? Theme.of(context).colorScheme.onSecondary,
-              ),
-        )
-      ],
+      ).animate().fadeIn(duration: 400.ms).slideX(begin: 0.1, end: 0),
     );
   }
 }

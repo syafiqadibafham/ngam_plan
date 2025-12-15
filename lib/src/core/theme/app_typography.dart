@@ -1,5 +1,5 @@
-import 'package:flutter/widgets.dart';
-
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:ngam_plan/src/core/theme/app_colors.dart';
 
 extension TextStyleExtensions on TextStyle {
@@ -13,158 +13,126 @@ class AppTypography {
   // Prevent instantiation
   AppTypography._();
 
-  // Font families
-  static const String _fontFamily = 'Poppins';
+  // Text Theme using GoogleFonts.outfit
+  static TextTheme get textTheme {
+    return GoogleFonts.outfitTextTheme(
+      const TextTheme(
+        displayLarge: TextStyle(
+          fontSize: 32.0,
+          fontWeight: FontWeight.bold,
+          color: AppColors.textPrimary,
+          height: 1.2,
+          letterSpacing: -1.0,
+        ),
+        displayMedium: TextStyle(
+          fontSize: 28.0,
+          fontWeight: FontWeight.bold,
+          color: AppColors.textPrimary,
+          height: 1.2,
+          letterSpacing: -0.5,
+        ),
+        displaySmall: TextStyle(
+          fontSize: 24.0,
+          fontWeight: FontWeight.bold,
+          color: AppColors.textPrimary,
+          height: 1.2,
+          letterSpacing: -0.25,
+        ),
+        headlineLarge: TextStyle(
+          fontSize: 22.0,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textPrimary,
+          height: 1.3,
+        ),
+        headlineMedium: TextStyle(
+          fontSize: 20.0,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textPrimary,
+          height: 1.3,
+        ),
+        headlineSmall: TextStyle(
+          fontSize: 18.0,
+          fontWeight: FontWeight.w600,
+          color: AppColors.textPrimary,
+          height: 1.3,
+        ),
+        titleLarge: TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textPrimary,
+          height: 1.4,
+        ),
+        titleMedium: TextStyle(
+          fontSize: 14.0,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textPrimary,
+          height: 1.4,
+        ),
+        titleSmall: TextStyle(
+          fontSize: 12.0,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textPrimary,
+          height: 1.4,
+        ),
+        bodyLarge: TextStyle(
+          fontSize: 16.0,
+          fontWeight: FontWeight.w400,
+          color: AppColors.textPrimary,
+          height: 1.5,
+        ),
+        bodyMedium: TextStyle(
+          fontSize: 14.0,
+          fontWeight: FontWeight.w400,
+          color: AppColors.textPrimary,
+          height: 1.5,
+        ),
+        bodySmall: TextStyle(
+          fontSize: 12.0,
+          fontWeight: FontWeight.w400,
+          color: AppColors.textPrimary,
+          height: 1.5,
+        ),
+        labelLarge: TextStyle(
+          fontSize: 14.0,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textSecondary,
+          height: 1.4,
+        ),
+        labelMedium: TextStyle(
+          fontSize: 12.0,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textSecondary,
+          height: 1.4,
+        ),
+        labelSmall: TextStyle(
+          fontSize: 10.0,
+          fontWeight: FontWeight.w500,
+          color: AppColors.textSecondary,
+          height: 1.4,
+        ),
+      ),
+    );
+  }
 
-  // Font weights
-  static const FontWeight light = FontWeight.w300;
-  static const FontWeight regular = FontWeight.w400;
-  static const FontWeight medium = FontWeight.w500;
-  static const FontWeight semiBold = FontWeight.w600;
-  static const FontWeight bold = FontWeight.w700;
-
-  // Font sizes
-  static const double _displayLarge = 32.0;
-  static const double _displayMedium = 28.0;
-  static const double _displaySmall = 24.0;
-  static const double _headlineLarge = 22.0;
-  static const double _headlineMedium = 20.0;
-  static const double _headlineSmall = 18.0;
-  static const double _titleLarge = 16.0;
-  static const double _titleMedium = 14.0;
-  static const double _titleSmall = 12.0;
-  static const double _bodyLarge = 16.0;
-  static const double _bodyMedium = 14.0;
-  static const double _bodySmall = 12.0;
-  static const double _labelLarge = 14.0;
-  static const double _labelMedium = 12.0;
-  static const double _labelSmall = 10.0;
-
-  // Display styles
-  static TextStyle get displayLarge => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _displayLarge,
-        fontWeight: bold,
-        color: AppColors.textPrimary,
-        height: 1.2,
-        letterSpacing: -0.5,
-      );
-
-  static TextStyle get displayMedium => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _displayMedium,
-        fontWeight: bold,
-        color: AppColors.textPrimary,
-        height: 1.2,
-        letterSpacing: -0.5,
-      );
-
-  static TextStyle get displaySmall => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _displaySmall,
-        fontWeight: bold,
-        color: AppColors.textPrimary,
-        height: 1.2,
-        letterSpacing: -0.25,
-      );
-
-  // Headline styles
-  static TextStyle get headlineLarge => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _headlineLarge,
-        fontWeight: semiBold,
-        color: AppColors.textPrimary,
-        height: 1.3,
-      );
-
-  static TextStyle get headlineMedium => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _headlineMedium,
-        fontWeight: semiBold,
-        color: AppColors.textPrimary,
-        height: 1.3,
-      );
-
-  static TextStyle get headlineSmall => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _headlineSmall,
-        fontWeight: semiBold,
-        color: AppColors.textPrimary,
-        height: 1.3,
-      );
-
-  // Title styles
-  static TextStyle get titleLarge => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _titleLarge,
-        fontWeight: medium,
-        color: AppColors.textPrimary,
-        height: 1.4,
-      );
-
-  static TextStyle get titleMedium => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _titleMedium,
-        fontWeight: medium,
-        color: AppColors.textPrimary,
-        height: 1.4,
-      );
-
-  static TextStyle get titleSmall => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _titleSmall,
-        fontWeight: medium,
-        color: AppColors.textPrimary,
-        height: 1.4,
-      );
-
-  // Body styles
-  static TextStyle get bodyLarge => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _bodyLarge,
-        fontWeight: regular,
-        color: AppColors.textPrimary,
-        height: 1.5,
-      );
-
-  static TextStyle get bodyMedium => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _bodyMedium,
-        fontWeight: regular,
-        color: AppColors.textPrimary,
-        height: 1.5,
-      );
-
-  static TextStyle get bodySmall => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _bodySmall,
-        fontWeight: regular,
-        color: AppColors.textPrimary,
-        height: 1.5,
-      );
-
-  // Label styles
-  static TextStyle get labelLarge => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _labelLarge,
-        fontWeight: medium,
-        color: AppColors.textSecondary,
-        height: 1.4,
-      );
-
-  static TextStyle get labelMedium => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _labelMedium,
-        fontWeight: medium,
-        color: AppColors.textSecondary,
-        height: 1.4,
-      );
-
-  static TextStyle get labelSmall => const TextStyle(
-        fontFamily: _fontFamily,
-        fontSize: _labelSmall,
-        fontWeight: medium,
-        color: AppColors.textSecondary,
-        height: 1.4,
-      );
+  // Deprecated individual getters preserved for backward compatibility during refactor
+  // Ideally, use Theme.of(context).textTheme...
+  static TextStyle get displayLarge => textTheme.displayLarge!;
+  static TextStyle get displayMedium => textTheme.displayMedium!;
+  static TextStyle get displaySmall => textTheme.displaySmall!;
+  
+  static TextStyle get headlineLarge => textTheme.headlineLarge!;
+  static TextStyle get headlineMedium => textTheme.headlineMedium!;
+  static TextStyle get headlineSmall => textTheme.headlineSmall!;
+  
+  static TextStyle get titleLarge => textTheme.titleLarge!;
+  static TextStyle get titleMedium => textTheme.titleMedium!;
+  static TextStyle get titleSmall => textTheme.titleSmall!;
+  
+  static TextStyle get bodyLarge => textTheme.bodyLarge!;
+  static TextStyle get bodyMedium => textTheme.bodyMedium!;
+  static TextStyle get bodySmall => textTheme.bodySmall!;
+  
+  static TextStyle get labelLarge => textTheme.labelLarge!;
+  static TextStyle get labelMedium => textTheme.labelMedium!;
+  static TextStyle get labelSmall => textTheme.labelSmall!;
 }

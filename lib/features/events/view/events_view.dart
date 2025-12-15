@@ -3,7 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
 import 'package:ngam_plan/features/events/view/add_event_view.dart';
 import 'package:ngam_plan/service_locator.dart';
+import 'package:ngam_plan/src/core/theme/app_colors.dart';
+import 'package:lucide_icons_flutter/lucide_icons.dart';
 import 'package:ngam_plan/src/core/theme/app_icons.dart';
+import 'package:ngam_plan/src/widgets/glass_widgets.dart';
 import 'package:ngam_plan/src/localization/app_localizations.dart';
 import 'package:ngam_plan/src/widgets/app_screen.dart';
 
@@ -29,7 +32,7 @@ class _EventsViewState extends State<EventsView> {
         title: AppLocalizations.of(context)!.eventsSectionTitle,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Navigator.of(context).push((MaterialPageRoute(builder: (context) => const AddEventView()))).then((_) {
+            Navigator.of(context).push((MaterialPageRoute(builder: (context) => const AddEventSheet()))).then((_) {
               setState(() {});
             });
           },
@@ -46,18 +49,25 @@ class _EventsViewState extends State<EventsView> {
                 }
                 return ListView.builder(
                   shrinkWrap: true,
+                  padding: const EdgeInsets.only(bottom: 100),
                   itemCount: events.length,
                   itemBuilder: (context, index) {
                     final event = events[index];
-                    return ListTile(
-                      leading: const Icon(AppIcons.event),
-                      title: Text(event.name),
-                      subtitle: Text(event.date.toLocal().toString().split(' ')[0]),
-                      trailing: IconButton(
-                        icon: const Icon(AppIcons.delete),
-                        onPressed: () {
-                          context.read<EventsCubit>().deleteEvent(event.id);
-                        },
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: GlassContainer(
+                        padding: EdgeInsets.zero,
+                        child: ListTile(
+                          leading: const Icon(LucideIcons.calendar),
+                          title: Text(event.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          subtitle: Text(event.date.toLocal().toString().split(' ')[0]),
+                          trailing: IconButton(
+                            icon: const Icon(LucideIcons.trash2, color: AppColors.error),
+                            onPressed: () {
+                              context.read<EventsCubit>().deleteEvent(event.id);
+                            },
+                          ),
+                        ),
                       ),
                     );
                   },
