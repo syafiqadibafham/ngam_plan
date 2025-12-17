@@ -51,7 +51,7 @@ class AppScreen extends StatelessWidget {
         centerTitle: false,
         title: Text(
           title,
-          style: Theme.of(context).textTheme.headlineMedium,
+          style: Theme.of(context).textTheme.headlineLarge,
         ),
       ),
       //floatingActionButton: floatingActionButton,

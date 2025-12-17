@@ -31,13 +31,13 @@ class GlassNavBar extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16),
       borderRadius: BorderRadius.circular(35),
       blur: 20,
-      backgroundColor: AppColors.glassSurface.withOpacity(0.15),
+      backgroundColor: Theme.of(context).colorScheme.surface,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(items.length, (index) {
           final item = items[index];
           final isSelected = index == selectedIndex;
-          
+
           return GestureDetector(
             onTap: () => onItemTapped(index),
             behavior: HitTestBehavior.opaque,
@@ -49,15 +49,15 @@ class GlassNavBar extends StatelessWidget {
                 Icon(
                   item.icon,
                   size: 24,
-                  color: isSelected ? AppColors.accentStart : AppColors.textDisabled,
+                  color: isSelected ? Theme.of(context).colorScheme.primary : Theme.of(context).disabledColor,
                 )
-                .animate(target: isSelected ? 1 : 0)
-                .scale(end: const Offset(1.2, 1.2), duration: 200.ms, curve: Curves.easeOutBack)
-                .elevation(end: 10, color: AppColors.accentStart.withOpacity(0.5))
-                .effect(duration: 300.ms, curve: Curves.easeInOut), // Generic effect holder for ensuring animation triggers
-                
+                    .animate(target: isSelected ? 1 : 0)
+                    .scale(end: const Offset(1.2, 1.2), duration: 200.ms, curve: Curves.easeOutBack)
+                    //.elevation(end: 10, color: Theme.of(context).colorScheme.primary)
+                    .effect(duration: 300.ms, curve: Curves.easeInOut), // Generic effect holder for ensuring animation triggers
+
                 const SizedBox(height: 4),
-                
+
                 // Label (Optional: only show when selected?)
                 // Design choice: Show all but fade unselected? Or simple dot?
                 // Request said "Airbnb" style which usually has labels.
@@ -65,9 +65,9 @@ class GlassNavBar extends StatelessWidget {
                   duration: const Duration(milliseconds: 200),
                   style: TextStyle(
                     fontFamily: 'Outfit',
-                    fontSize: 10,
+                    fontSize: 12,
                     fontWeight: isSelected ? FontWeight.w600 : FontWeight.w400,
-                    color: isSelected ? AppColors.accentStart : AppColors.textDisabled,
+                    color: isSelected ? Theme.of(context).colorScheme.primary : AppColors.textDisabled,
                   ),
                   child: Text(item.label),
                 ),

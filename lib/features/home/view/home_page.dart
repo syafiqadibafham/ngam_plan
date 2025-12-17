@@ -13,14 +13,14 @@ import 'package:ngam_plan/src/core/theme/app_colors.dart';
 import 'package:ngam_plan/src/widgets/glass_widgets.dart';
 import 'package:ngam_plan/src/utils/countdown_calculator.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
@@ -37,7 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
       builder: (context, state) {
         return RefreshIndicator(
           onRefresh: _onRefresh,
-          color: AppColors.accentStart,
+          color: Theme.of(context).colorScheme.primary,
           backgroundColor: AppColors.glassSurface,
           child: AppScreen(
             title: AppLocalizations.of(context)!.homeSectionTitle,
@@ -167,11 +167,13 @@ class _HeroEventCardState extends State<_HeroEventCard> {
           width: double.infinity,
           padding: const EdgeInsets.all(20),
           borderRadius: BorderRadius.circular(24),
-          backgroundColor: AppColors.primary.withOpacity(0.2), // Highlight for Hero
+          backgroundColor: Theme.of(context).colorScheme.surface, // Highlight for Hero
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(LucideIcons.zap, size: 40, color: AppColors.accentStart).animate(onPlay: (c) => c.repeat(reverse: true)).scale(begin: const Offset(1, 1), end: const Offset(1.2, 1.2)),
+              Icon(LucideIcons.zap, size: 40, color: Theme.of(context).colorScheme.secondary)
+                  .animate(onPlay: (c) => c.repeat(reverse: true))
+                  .scale(begin: const Offset(1, 1), end: const Offset(1.2, 1.2)),
               const SizedBox(height: 16),
               Text(
                 widget.event.name,
@@ -187,7 +189,7 @@ class _HeroEventCardState extends State<_HeroEventCard> {
                 ),
                 child: Text(
                   CountdownCalculator.getCountdownString(widget.event, context),
-                  style: const TextStyle(fontWeight: FontWeight.bold, color: AppColors.textPrimary),
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
                 ),
               ),
             ],
@@ -209,7 +211,7 @@ class _LoadingShimmer extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
           child: Shimmer.fromColors(
-            baseColor: AppColors.glassSurface,
+            baseColor: Theme.of(context).colorScheme.surface,
             highlightColor: AppColors.glassBorder,
             child: Container(
               height: 80,

@@ -3,8 +3,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:ngam_plan/src/core/theme/app_icons.dart';
 import 'package:ngam_plan/src/widgets/animated_background.dart';
 import 'package:ngam_plan/features/events/view/events_view.dart';
-import 'package:ngam_plan/features/home/view/home_screen.dart';
-import 'package:ngam_plan/features/settings/view/settings_view.dart';
+import 'package:ngam_plan/features/home/view/home_page.dart';
+import 'package:ngam_plan/features/settings/view/settings_page.dart';
 import 'package:ngam_plan/src/core/theme/app_colors.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart'; // Updated to use Lucide
 import 'package:ngam_plan/src/localization/app_localizations.dart';
@@ -30,7 +30,7 @@ class _BaseScreenState extends State<BaseScreen> {
       NavBarItem(
         icon: AppIcons.home,
         label: AppLocalizations.of(context)!.homeSectionTitle,
-        view: const HomeScreen(),
+        view: const HomePage(),
       ),
       NavBarItem(
         icon: AppIcons.event,
