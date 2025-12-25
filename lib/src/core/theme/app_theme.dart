@@ -17,7 +17,7 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       primaryColor: AppColors.primary,
-      scaffoldBackgroundColor: Colors.transparent, // Transparent to show gradient wallpaper
+      scaffoldBackgroundColor: Colors.white, // Transparent to show gradient wallpaper
       textTheme: AppTypography.textTheme,
       fontFamily: 'Outfit', // Ensure font family is applied globally
       colorScheme: const ColorScheme.light(
@@ -25,7 +25,7 @@ class AppTheme {
         secondary: AppColors.secondary,
         tertiary: AppColors.accent,
         error: AppColors.error,
-        surface: AppColors.glassSurface,
+        surface: Colors.white,
         onSurface: AppColors.textPrimary,
         onPrimary: AppColors.textOnPrimary,
         onSecondary: AppColors.textOnSecondary,

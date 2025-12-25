@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngam_plan/src/core/theme/app_colors.dart';
 import 'package:ngam_plan/src/widgets/animated_background.dart';
 
 class AppScreen extends StatelessWidget {
@@ -38,28 +39,39 @@ class AppScreen extends StatelessWidget {
       ],
     );
 
-    if (includeBackground) {
-      content = AnimatedBackground(child: content);
-    }
+    // if (includeBackground) {
+    //   content = AnimatedBackground(child: content);
+    // }
 
-    return Scaffold(
-      backgroundColor: Colors.transparent,
-      appBar: AppBar(
-        foregroundColor: Theme.of(context).colorScheme.onSurface,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        centerTitle: false,
-        title: Text(
-          title,
-          style: Theme.of(context).textTheme.headlineLarge,
+    return Container(
+      decoration: BoxDecoration(
+        gradient: RadialGradient(
+          colors: [
+            AppColors.backgroundStart,
+            Theme.of(context).scaffoldBackgroundColor,
+          ],
+          center: Alignment.topLeft,
         ),
       ),
-      //floatingActionButton: floatingActionButton,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: content,
+      child: Scaffold(
+        backgroundColor: Colors.transparent,
+        appBar: AppBar(
+          foregroundColor: Theme.of(context).colorScheme.onSurface,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          centerTitle: false,
+          title: Text(
+            title,
+            style: Theme.of(context).textTheme.headlineLarge,
+          ),
+        ),
+        //floatingActionButton: floatingActionButton,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: content,
+        ),
+        //bottomNavigationBar: bottomWidget,
       ),
-      //bottomNavigationBar: bottomWidget,
     );
   }
 }

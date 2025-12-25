@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
+import 'package:ngam_plan/features/events/models/calculation_type_extension.dart';
 import 'package:ngam_plan/features/events/models/event.dart';
-import 'package:ngam_plan/features/events/models/event_types.dart';
+import 'package:ngam_plan/features/events/models/calculation_types.dart';
 import 'package:ngam_plan/src/core/theme/app_colors.dart';
 import 'package:ngam_plan/src/widgets/app_screen.dart';
 import 'package:ngam_plan/src/widgets/text_input.dart';
@@ -21,7 +22,7 @@ class _AddEventSheetState extends State<AddEventSheet> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   DateTime? _selectedDate;
-  EventType _selectedType = EventType.general;
+  CalculationType _selectedType = CalculationType.general;
   File? _imageFile;
 
   Future<void> _pickImage() async {
@@ -45,19 +46,19 @@ class _AddEventSheetState extends State<AddEventSheet> {
         id: UniqueKey().toString(),
         name: _nameController.text,
         date: _selectedDate!,
-        type: _selectedType,
+        calculationType: _selectedType,
         imageUrl: _imageFile?.path,
       );
-      context.read<EventsCubit>().addEvent(newEvent).then((_) {
+      context.read<EventsCubit>().addEvent(newEvent).catchError((error) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Failed to add event: $error')),
+        );
+      }).then((_) {
         if (!mounted) return;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(content: Text('Event added successfully')),
         );
         Navigator.of(context).pop();
-      }).catchError((error) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Failed to add event: $error')),
-        );
       });
     }
   }
@@ -91,6 +92,8 @@ class _AddEventSheetState extends State<AddEventSheet> {
             children: [
               _buildImagePicker(),
               const SizedBox(height: 16),
+              _buildEventTypeSelector(),
+              const SizedBox(height: 16),
               TextInput(
                 controller: _nameController,
                 labelText: 'Event Name',
@@ -103,8 +106,6 @@ class _AddEventSheetState extends State<AddEventSheet> {
               ),
               const SizedBox(height: 16),
               _buildDatePicker(),
-              const SizedBox(height: 16),
-              _buildEventTypeSelector(),
             ],
           ),
         ),
@@ -165,8 +166,8 @@ class _AddEventSheetState extends State<AddEventSheet> {
               final pickedDate = await showDatePicker(
                 context: context,
                 initialDate: _selectedDate ?? DateTime.now(),
-                firstDate: DateTime(2000),
-                lastDate: DateTime(2101),
+                firstDate: DateTime(1900),
+                lastDate: _selectedType.lastDate,
               );
               if (pickedDate != null) {
                 setState(() {
@@ -182,17 +183,17 @@ class _AddEventSheetState extends State<AddEventSheet> {
   }
 
   Widget _buildEventTypeSelector() {
-    return DropdownButtonFormField<EventType>(
+    return DropdownButtonFormField<CalculationType>(
       value: _selectedType,
-      onChanged: (EventType? newValue) {
+      onChanged: (CalculationType? newValue) {
         if (newValue != null) {
           setState(() {
             _selectedType = newValue;
           });
         }
       },
-      items: EventType.values.map((EventType type) {
-        return DropdownMenuItem<EventType>(
+      items: CalculationType.values.map((CalculationType type) {
+        return DropdownMenuItem<CalculationType>(
           value: type,
           child: Text(type.name[0].toUpperCase() + type.name.substring(1)),
         );

@@ -39,62 +39,59 @@ class _HomePageState extends State<HomePage> {
           onRefresh: _onRefresh,
           color: Theme.of(context).colorScheme.primary,
           backgroundColor: AppColors.glassSurface,
-          child: AppScreen(
-            title: AppLocalizations.of(context)!.homeSectionTitle,
-            child: state.when(
-                initial: () => const SizedBox.shrink(),
-                loading: () => const _LoadingShimmer(),
-                error: (message) => Center(child: Text(message, style: const TextStyle(color: AppColors.error))),
-                loaded: (events) {
-                  //final sortedEvents = List.of(events)..sort((a, b) => a.upcomingDate.compareTo(b.upcomingDate));
+          child: state.when(
+              initial: () => const SizedBox.shrink(),
+              loading: () => const _LoadingShimmer(),
+              error: (message) => Center(child: Text(message, style: const TextStyle(color: AppColors.error))),
+              loaded: (events) {
+                //final sortedEvents = List.of(events)..sort((a, b) => a.upcomingDate.compareTo(b.upcomingDate));
 
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        // Hero Section (Next Event)
-                        if (events.isNotEmpty)
-                          Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 20),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Up Next", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-                                const SizedBox(height: 12),
-                                _HeroEventCard(event: _getNextEvent(events)),
-                              ],
-                            ),
-                          ),
-
-                        // All Events List
-                        Text("All Events", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
-
+                return SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      // Hero Section (Next Event)
+                      if (events.isNotEmpty)
                         Padding(
-                          padding: const EdgeInsets.only(top: 12, bottom: 100), // Bottom padding for navbar
-                          child: ListView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              final sortedEvents = _getSortedEvents(events);
-                              if (index >= sortedEvents.length) return null;
-                              final event = sortedEvents[index];
-
-                              // Skip the first one if it's shown in Hero?
-                              // Logic: Show all in list or skip?
-                              // "Overview of all events" implies all. I'll show all, maybe mark the first one?
-                              // For now, simple list.
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 12),
-                                child: EventHomeWidget(event: event),
-                              ).animate().fadeIn(delay: (50 * index).ms).slideY(begin: 0.1, end: 0);
-                            },
-                            itemCount: events.length,
+                          padding: const EdgeInsets.symmetric(vertical: 20),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text("Up Next", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+                              const SizedBox(height: 12),
+                              _HeroEventCard(event: _getNextEvent(events)),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
-                  );
-                }),
-          ),
+
+                      // All Events List
+                      Text("All Events", style: Theme.of(context).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold)),
+
+                      Padding(
+                        padding: const EdgeInsets.only(top: 12, bottom: 100), // Bottom padding for navbar
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemBuilder: (context, index) {
+                            final sortedEvents = _getSortedEvents(events);
+                            if (index >= sortedEvents.length) return null;
+                            final event = sortedEvents[index];
+
+                            // Skip the first one if it's shown in Hero?
+                            // Logic: Show all in list or skip?
+                            // "Overview of all events" implies all. I'll show all, maybe mark the first one?
+                            // For now, simple list.
+                            return Padding(
+                              padding: const EdgeInsets.only(bottom: 12),
+                              child: EventHomeWidget(event: event),
+                            ).animate().fadeIn(delay: (50 * index).ms).slideY(begin: 0.1, end: 0);
+                          },
+                          itemCount: events.length,
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              }),
         );
       },
     );

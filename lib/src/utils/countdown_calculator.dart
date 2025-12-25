@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:ngam_plan/features/events/models/event.dart';
-import 'package:ngam_plan/features/events/models/event_types.dart';
+import 'package:ngam_plan/features/events/models/calculation_types.dart';
 import 'package:ngam_plan/src/localization/app_localizations.dart';
 
 class CountdownCalculator {
   static String getCountdownString(Event event, BuildContext context) {
     final now = DateTime.now();
 
-    switch (event.type) {
-      case EventType.anniversary:
+    switch (event.calculationType) {
+      case CalculationType.anniversary:
         return _getAnniversaryCountdown(event, now, context);
-      case EventType.memory:
+      case CalculationType.memory:
         return _getMemoryCountdown(event, now, context);
       default:
         return _getAnnualCountdown(event, now, context);
@@ -19,22 +19,19 @@ class CountdownCalculator {
 
   static DateTime getNextMilestoneDate(Event event) {
     final now = DateTime.now();
-    switch (event.type) {
-      case EventType.anniversary:
+    switch (event.calculationType) {
+      case CalculationType.anniversary:
         final nextAnnualDate = _getNextAnnualAnniversaryDate(event, now);
         final next100DayDate = _getNext100DayAnniversaryDate(event, now);
-        return nextAnnualDate.isBefore(next100DayDate)
-            ? nextAnnualDate
-            : next100DayDate;
-      case EventType.memory:
+        return nextAnnualDate.isBefore(next100DayDate) ? nextAnnualDate : next100DayDate;
+      case CalculationType.memory:
         return event.date;
       default:
         return _getAnnualOccurrenceDate(event, now);
     }
   }
 
-  static String _getMemoryCountdown(
-      Event event, DateTime now, BuildContext context) {
+  static String _getMemoryCountdown(Event event, DateTime now, BuildContext context) {
     final difference = event.date.difference(now);
     if (difference.isNegative) {
       return AppLocalizations.of(context)!.daysAgo(-difference.inDays);
@@ -42,15 +39,13 @@ class CountdownCalculator {
     return AppLocalizations.of(context)!.inDays(difference.inDays);
   }
 
-  static String _getAnnualCountdown(
-      Event event, DateTime now, BuildContext context) {
+  static String _getAnnualCountdown(Event event, DateTime now, BuildContext context) {
     final nextOccurrence = _getAnnualOccurrenceDate(event, now);
     final difference = nextOccurrence.difference(now);
     return AppLocalizations.of(context)!.inDays(difference.inDays);
   }
 
-  static String _getAnniversaryCountdown(
-      Event event, DateTime now, BuildContext context) {
+  static String _getAnniversaryCountdown(Event event, DateTime now, BuildContext context) {
     final nextAnnualDate = _getNextAnnualAnniversaryDate(event, now);
     final next100DayDate = _getNext100DayAnniversaryDate(event, now);
 
@@ -85,13 +80,11 @@ class CountdownCalculator {
     final anniversaryStartDate = event.date;
     int yearsPassed = now.year - anniversaryStartDate.year;
 
-    DateTime nextAnniversary = DateTime(anniversaryStartDate.year + yearsPassed,
-        anniversaryStartDate.month, anniversaryStartDate.day);
+    DateTime nextAnniversary = DateTime(anniversaryStartDate.year + yearsPassed, anniversaryStartDate.month, anniversaryStartDate.day);
 
     if (nextAnniversary.isBefore(now)) {
       yearsPassed++;
-      nextAnniversary = DateTime(anniversaryStartDate.year + yearsPassed,
-          anniversaryStartDate.month, anniversaryStartDate.day);
+      nextAnniversary = DateTime(anniversaryStartDate.year + yearsPassed, anniversaryStartDate.month, anniversaryStartDate.day);
     }
     return nextAnniversary;
   }

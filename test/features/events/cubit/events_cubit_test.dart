@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
 import 'package:ngam_plan/features/events/models/event.dart';
-import 'package:ngam_plan/features/events/models/event_types.dart';
+import 'package:ngam_plan/features/events/models/calculation_types.dart';
 import 'package:ngam_plan/features/events/repositories/event_repository.dart';
 
 class MockEventRepository extends Mock implements EventRepository {}
@@ -32,7 +32,7 @@ void main() {
           id: '1',
           name: 'Test Event',
           date: DateTime.now(),
-          type: EventType.general,
+          calculationType: CalculationType.general,
         )
       ];
 
@@ -68,14 +68,14 @@ void main() {
         id: '2',
         name: 'New Event',
         date: DateTime.now(),
-        type: EventType.general,
+        calculationType: CalculationType.general,
       );
       final events = [
         Event(
           id: '1',
           name: 'Test Event',
           date: DateTime.now(),
-          type: EventType.general,
+          calculationType: CalculationType.general,
         ),
         event,
       ];
@@ -118,7 +118,7 @@ void main() {
           id: '2',
           name: 'Another Event',
           date: DateTime.now(),
-          type: EventType.general,
+          calculationType: CalculationType.general,
         ),
       ];
 

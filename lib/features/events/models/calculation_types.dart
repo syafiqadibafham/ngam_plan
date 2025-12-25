@@ -1,4 +1,4 @@
-enum EventType {
+enum CalculationType {
   birthday,
   anniversary,
   holiday,

@@ -1,5 +1,5 @@
-// coverage:ignore-file
 // GENERATED CODE - DO NOT MODIFY BY HAND
+// coverage:ignore-file
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
@@ -9,114 +9,78 @@ part of 'event.dart';
 // FreezedGenerator
 // **************************************************************************
 
+// dart format off
 T _$identity<T>(T value) => value;
-
-final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
 /// @nodoc
 mixin _$Event {
-  String get id => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  DateTime get date => throw _privateConstructorUsedError;
-  EventType get type => throw _privateConstructorUsedError;
-  String? get imageUrl => throw _privateConstructorUsedError;
-  Color? get color => throw _privateConstructorUsedError;
+  String get id;
+  String get name;
+  DateTime get date;
+  @JsonKey(name: 'calculation_type')
+  CalculationType get calculationType;
+  @JsonKey(name: 'image_url')
+  String? get imageUrl;
+  @JsonKey(name: 'color_hex')
+  String? get colorHex;
 
   /// Create a copy of Event
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
-  $EventCopyWith<Event> get copyWith => throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $EventCopyWith<$Res> {
-  factory $EventCopyWith(Event value, $Res Function(Event) then) =
-      _$EventCopyWithImpl<$Res, Event>;
-  @useResult
-  $Res call(
-      {String id,
-      String name,
-      DateTime date,
-      EventType type,
-      String? imageUrl,
-      Color? color});
-}
-
-/// @nodoc
-class _$EventCopyWithImpl<$Res, $Val extends Event>
-    implements $EventCopyWith<$Res> {
-  _$EventCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  /// Create a copy of Event
-  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  $EventCopyWith<Event> get copyWith =>
+      _$EventCopyWithImpl<Event>(this as Event, _$identity);
+
+  /// Serializes this Event to a JSON map.
+  Map<String, dynamic> toJson();
+
   @override
-  $Res call({
-    Object? id = null,
-    Object? name = null,
-    Object? date = null,
-    Object? type = null,
-    Object? imageUrl = freezed,
-    Object? color = freezed,
-  }) {
-    return _then(_value.copyWith(
-      id: null == id
-          ? _value.id
-          : id // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      date: null == date
-          ? _value.date
-          : date // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as EventType,
-      imageUrl: freezed == imageUrl
-          ? _value.imageUrl
-          : imageUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
-    ) as $Val);
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is Event &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name) &&
+            (identical(other.date, date) || other.date == date) &&
+            (identical(other.calculationType, calculationType) ||
+                other.calculationType == calculationType) &&
+            (identical(other.imageUrl, imageUrl) ||
+                other.imageUrl == imageUrl) &&
+            (identical(other.colorHex, colorHex) ||
+                other.colorHex == colorHex));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, id, name, date, calculationType, imageUrl, colorHex);
+
+  @override
+  String toString() {
+    return 'Event(id: $id, name: $name, date: $date, calculationType: $calculationType, imageUrl: $imageUrl, colorHex: $colorHex)';
   }
 }
 
 /// @nodoc
-abstract class _$$EventImplCopyWith<$Res> implements $EventCopyWith<$Res> {
-  factory _$$EventImplCopyWith(
-          _$EventImpl value, $Res Function(_$EventImpl) then) =
-      __$$EventImplCopyWithImpl<$Res>;
-  @override
+abstract mixin class $EventCopyWith<$Res> {
+  factory $EventCopyWith(Event value, $Res Function(Event) _then) =
+      _$EventCopyWithImpl;
   @useResult
   $Res call(
       {String id,
       String name,
       DateTime date,
-      EventType type,
-      String? imageUrl,
-      Color? color});
+      @JsonKey(name: 'calculation_type') CalculationType calculationType,
+      @JsonKey(name: 'image_url') String? imageUrl,
+      @JsonKey(name: 'color_hex') String? colorHex});
 }
 
 /// @nodoc
-class __$$EventImplCopyWithImpl<$Res>
-    extends _$EventCopyWithImpl<$Res, _$EventImpl>
-    implements _$$EventImplCopyWith<$Res> {
-  __$$EventImplCopyWithImpl(
-      _$EventImpl _value, $Res Function(_$EventImpl) _then)
-      : super(_value, _then);
+class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
+  _$EventCopyWithImpl(this._self, this._then);
+
+  final Event _self;
+  final $Res Function(Event) _then;
 
   /// Create a copy of Event
   /// with the given fields replaced by the non-null parameter values.
@@ -126,49 +90,232 @@ class __$$EventImplCopyWithImpl<$Res>
     Object? id = null,
     Object? name = null,
     Object? date = null,
-    Object? type = null,
+    Object? calculationType = null,
     Object? imageUrl = freezed,
-    Object? color = freezed,
+    Object? colorHex = freezed,
   }) {
-    return _then(_$EventImpl(
+    return _then(_self.copyWith(
       id: null == id
-          ? _value.id
+          ? _self.id
           : id // ignore: cast_nullable_to_non_nullable
               as String,
       name: null == name
-          ? _value.name
+          ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
       date: null == date
-          ? _value.date
+          ? _self.date
           : date // ignore: cast_nullable_to_non_nullable
               as DateTime,
-      type: null == type
-          ? _value.type
-          : type // ignore: cast_nullable_to_non_nullable
-              as EventType,
+      calculationType: null == calculationType
+          ? _self.calculationType
+          : calculationType // ignore: cast_nullable_to_non_nullable
+              as CalculationType,
       imageUrl: freezed == imageUrl
-          ? _value.imageUrl
+          ? _self.imageUrl
           : imageUrl // ignore: cast_nullable_to_non_nullable
               as String?,
-      color: freezed == color
-          ? _value.color
-          : color // ignore: cast_nullable_to_non_nullable
-              as Color?,
+      colorHex: freezed == colorHex
+          ? _self.colorHex
+          : colorHex // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
 
-/// @nodoc
+/// Adds pattern-matching-related methods to [Event].
+extension EventPatterns on Event {
+  /// A variant of `map` that fallback to returning `orElse`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
 
-class _$EventImpl implements _Event {
-  const _$EventImpl(
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>(
+    TResult Function(_Event value)? $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Event() when $default != null:
+        return $default(_that);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// Callbacks receives the raw object, upcasted.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case final Subclass2 value:
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>(
+    TResult Function(_Event value) $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Event():
+        return $default(_that);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `map` that fallback to returning `null`.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case final Subclass value:
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>(
+    TResult? Function(_Event value)? $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Event() when $default != null:
+        return $default(_that);
+      case _:
+        return null;
+    }
+  }
+
+  /// A variant of `when` that fallback to an `orElse` callback.
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return orElse();
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String name,
+            DateTime date,
+            @JsonKey(name: 'calculation_type') CalculationType calculationType,
+            @JsonKey(name: 'image_url') String? imageUrl,
+            @JsonKey(name: 'color_hex') String? colorHex)?
+        $default, {
+    required TResult orElse(),
+  }) {
+    final _that = this;
+    switch (_that) {
+      case _Event() when $default != null:
+        return $default(_that.id, _that.name, _that.date, _that.calculationType,
+            _that.imageUrl, _that.colorHex);
+      case _:
+        return orElse();
+    }
+  }
+
+  /// A `switch`-like method, using callbacks.
+  ///
+  /// As opposed to `map`, this offers destructuring.
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case Subclass2(:final field2):
+  ///     return ...;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>(
+    TResult Function(
+            String id,
+            String name,
+            DateTime date,
+            @JsonKey(name: 'calculation_type') CalculationType calculationType,
+            @JsonKey(name: 'image_url') String? imageUrl,
+            @JsonKey(name: 'color_hex') String? colorHex)
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Event():
+        return $default(_that.id, _that.name, _that.date, _that.calculationType,
+            _that.imageUrl, _that.colorHex);
+      case _:
+        throw StateError('Unexpected subclass');
+    }
+  }
+
+  /// A variant of `when` that fallback to returning `null`
+  ///
+  /// It is equivalent to doing:
+  /// ```dart
+  /// switch (sealedClass) {
+  ///   case Subclass(:final field):
+  ///     return ...;
+  ///   case _:
+  ///     return null;
+  /// }
+  /// ```
+
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>(
+    TResult? Function(
+            String id,
+            String name,
+            DateTime date,
+            @JsonKey(name: 'calculation_type') CalculationType calculationType,
+            @JsonKey(name: 'image_url') String? imageUrl,
+            @JsonKey(name: 'color_hex') String? colorHex)?
+        $default,
+  ) {
+    final _that = this;
+    switch (_that) {
+      case _Event() when $default != null:
+        return $default(_that.id, _that.name, _that.date, _that.calculationType,
+            _that.imageUrl, _that.colorHex);
+      case _:
+        return null;
+    }
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _Event extends Event {
+  const _Event(
       {required this.id,
       required this.name,
       required this.date,
-      required this.type,
-      this.imageUrl,
-      this.color});
+      @JsonKey(name: 'calculation_type') required this.calculationType,
+      @JsonKey(name: 'image_url') this.imageUrl,
+      @JsonKey(name: 'color_hex') this.colorHex})
+      : super._();
+  factory _Event.fromJson(Map<String, dynamic> json) => _$EventFromJson(json);
 
   @override
   final String id;
@@ -177,70 +324,118 @@ class _$EventImpl implements _Event {
   @override
   final DateTime date;
   @override
-  final EventType type;
+  @JsonKey(name: 'calculation_type')
+  final CalculationType calculationType;
   @override
+  @JsonKey(name: 'image_url')
   final String? imageUrl;
   @override
-  final Color? color;
+  @JsonKey(name: 'color_hex')
+  final String? colorHex;
+
+  /// Create a copy of Event
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$EventCopyWith<_Event> get copyWith =>
+      __$EventCopyWithImpl<_Event>(this, _$identity);
 
   @override
-  String toString() {
-    return 'Event(id: $id, name: $name, date: $date, type: $type, imageUrl: $imageUrl, color: $color)';
+  Map<String, dynamic> toJson() {
+    return _$EventToJson(
+      this,
+    );
   }
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$EventImpl &&
+            other is _Event &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
             (identical(other.date, date) || other.date == date) &&
-            (identical(other.type, type) || other.type == type) &&
+            (identical(other.calculationType, calculationType) ||
+                other.calculationType == calculationType) &&
             (identical(other.imageUrl, imageUrl) ||
                 other.imageUrl == imageUrl) &&
-            (identical(other.color, color) || other.color == color));
+            (identical(other.colorHex, colorHex) ||
+                other.colorHex == colorHex));
   }
 
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, id, name, date, type, imageUrl, color);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, date, calculationType, imageUrl, colorHex);
+
+  @override
+  String toString() {
+    return 'Event(id: $id, name: $name, date: $date, calculationType: $calculationType, imageUrl: $imageUrl, colorHex: $colorHex)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
+  factory _$EventCopyWith(_Event value, $Res Function(_Event) _then) =
+      __$EventCopyWithImpl;
+  @override
+  @useResult
+  $Res call(
+      {String id,
+      String name,
+      DateTime date,
+      @JsonKey(name: 'calculation_type') CalculationType calculationType,
+      @JsonKey(name: 'image_url') String? imageUrl,
+      @JsonKey(name: 'color_hex') String? colorHex});
+}
+
+/// @nodoc
+class __$EventCopyWithImpl<$Res> implements _$EventCopyWith<$Res> {
+  __$EventCopyWithImpl(this._self, this._then);
+
+  final _Event _self;
+  final $Res Function(_Event) _then;
 
   /// Create a copy of Event
   /// with the given fields replaced by the non-null parameter values.
-  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
-  _$$EventImplCopyWith<_$EventImpl> get copyWith =>
-      __$$EventImplCopyWithImpl<_$EventImpl>(this, _$identity);
+  $Res call({
+    Object? id = null,
+    Object? name = null,
+    Object? date = null,
+    Object? calculationType = null,
+    Object? imageUrl = freezed,
+    Object? colorHex = freezed,
+  }) {
+    return _then(_Event(
+      id: null == id
+          ? _self.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
+      name: null == name
+          ? _self.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      date: null == date
+          ? _self.date
+          : date // ignore: cast_nullable_to_non_nullable
+              as DateTime,
+      calculationType: null == calculationType
+          ? _self.calculationType
+          : calculationType // ignore: cast_nullable_to_non_nullable
+              as CalculationType,
+      imageUrl: freezed == imageUrl
+          ? _self.imageUrl
+          : imageUrl // ignore: cast_nullable_to_non_nullable
+              as String?,
+      colorHex: freezed == colorHex
+          ? _self.colorHex
+          : colorHex // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
 }
 
-abstract class _Event implements Event {
-  const factory _Event(
-      {required final String id,
-      required final String name,
-      required final DateTime date,
-      required final EventType type,
-      final String? imageUrl,
-      final Color? color}) = _$EventImpl;
-
-  @override
-  String get id;
-  @override
-  String get name;
-  @override
-  DateTime get date;
-  @override
-  EventType get type;
-  @override
-  String? get imageUrl;
-  @override
-  Color? get color;
-
-  /// Create a copy of Event
-  /// with the given fields replaced by the non-null parameter values.
-  @override
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  _$$EventImplCopyWith<_$EventImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
+// dart format on

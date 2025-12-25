@@ -5,7 +5,6 @@ import 'package:ngam_plan/features/auth/cubit/auth_cubit.dart';
 import 'package:ngam_plan/features/settings/cubit/settings_cubit.dart';
 import 'package:ngam_plan/features/settings/cubit/settings_state.dart';
 import 'package:ngam_plan/src/localization/app_localizations.dart';
-import 'package:ngam_plan/src/widgets/app_screen.dart';
 
 class SettingsView extends StatelessWidget {
   const SettingsView({super.key});
@@ -14,19 +13,16 @@ class SettingsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScreen(
-      title: AppLocalizations.of(context)!.settingsSectionTitle,
-      child: ListView(
-        children: [
-          _buildSectionHeader(context, 'Appearance'),
-          _buildThemeSetting(context),
-          const Divider(),
-          _buildSectionHeader(context, 'User'),
-          _buildUpdateProfileSetting(context),
-          _buildLogoutSetting(context),
-          _buildDeleteAccountSetting(context),
-        ],
-      ),
+    return ListView(
+      children: [
+        _buildSectionHeader(context, 'Appearance'),
+        _buildThemeSetting(context),
+        const Divider(),
+        _buildSectionHeader(context, 'User'),
+        _buildUpdateProfileSetting(context),
+        _buildLogoutSetting(context),
+        _buildDeleteAccountSetting(context),
+      ],
     );
   }
 
@@ -108,8 +104,7 @@ class SettingsView extends StatelessWidget {
           builder: (BuildContext dialogContext) {
             return AlertDialog(
               title: const Text('Delete Account'),
-              content: const Text(
-                  'Are you sure you want to delete your account? This action is irreversible.'),
+              content: const Text('Are you sure you want to delete your account? This action is irreversible.'),
               actions: <Widget>[
                 TextButton(
                   child: const Text('Cancel'),
@@ -120,8 +115,7 @@ class SettingsView extends StatelessWidget {
                 TextButton(
                   child: Text(
                     'Delete',
-                    style:
-                        TextStyle(color: Theme.of(context).colorScheme.error),
+                    style: TextStyle(color: Theme.of(context).colorScheme.error),
                   ),
                   onPressed: () {
                     context.read<AuthCubit>().deleteAccount();

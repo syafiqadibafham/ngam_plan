@@ -6,13 +6,13 @@ class AppColors {
 
   // Core Gradient Colors
   static const Color backgroundStart = Color(0xFFfabce3); // Deep Purple
-  static const Color backgroundEnd = Color(0xFFfbddbd); // Darker Indigo
+  static const Color backgroundEnd = Color.fromARGB(255, 255, 255, 255); // Darker Indigo
   static const Color accentStart = Color(0xFF2980B9); // Fuchsia Pop
   static const Color accentEnd = Color(0xFF6DD5FA); // Indigo Blue
 
   // Glass Colors
   static const Color glassSurface = Color.fromARGB(131, 255, 255, 255); // 12% White
-  static const Color glassBorder = Color(0x33FFFFFF); // 20% White
+  static const Color glassBorder = Color.fromARGB(51, 225, 224, 224); // 20% White
   static const Color glassShadow = Color(0x33000000); // 20% Black
 
   // Base colors

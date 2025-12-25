@@ -30,8 +30,8 @@ class GlassNavBar extends StatelessWidget {
       margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       padding: const EdgeInsets.symmetric(horizontal: 16),
       borderRadius: BorderRadius.circular(35),
-      blur: 20,
-      backgroundColor: Theme.of(context).colorScheme.surface,
+      backgroundColor: AppColors.glassSurface,
+      borderColor: AppColors.glassBorder,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: List.generate(items.length, (index) {

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:ngam_plan/features/events/models/event.dart';
-import 'package:ngam_plan/features/events/models/event_types.dart';
+import 'package:ngam_plan/features/events/models/calculation_types.dart';
 import 'package:ngam_plan/features/events/repositories/mock_event_repository.dart';
 
 void main() {
@@ -21,7 +21,7 @@ void main() {
         id: '3',
         name: 'Test Event',
         date: DateTime.now(),
-        type: EventType.general,
+        calculationType: CalculationType.general,
       );
       await repository.addEvent(event);
       final events = await repository.getEvents();
@@ -33,7 +33,7 @@ void main() {
         id: '3',
         name: 'Test Event',
         date: DateTime.now(),
-        type: EventType.general,
+        calculationType: CalculationType.general,
       );
       await repository.addEvent(event);
       await repository.deleteEvent(event.id);
