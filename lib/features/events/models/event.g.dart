@@ -9,7 +9,10 @@ part of 'event.dart';
 _Event _$EventFromJson(Map<String, dynamic> json) => _Event(
       id: json['id'] as String,
       name: json['name'] as String,
-      date: DateTime.parse(json['date'] as String),
+      startDate: DateTime.parse(json['start_date'] as String),
+      endDate: json['end_date'] == null
+          ? null
+          : DateTime.parse(json['end_date'] as String),
       calculationType:
           $enumDecode(_$CalculationTypeEnumMap, json['calculation_type']),
       imageUrl: json['image_url'] as String?,
@@ -19,7 +22,8 @@ _Event _$EventFromJson(Map<String, dynamic> json) => _Event(
 Map<String, dynamic> _$EventToJson(_Event instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'date': instance.date.toIso8601String(),
+      'start_date': instance.startDate.toIso8601String(),
+      'end_date': instance.endDate?.toIso8601String(),
       'calculation_type': _$CalculationTypeEnumMap[instance.calculationType]!,
       'image_url': instance.imageUrl,
       'color_hex': instance.colorHex,

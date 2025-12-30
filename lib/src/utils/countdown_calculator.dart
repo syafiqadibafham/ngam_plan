@@ -25,14 +25,14 @@ class CountdownCalculator {
         final next100DayDate = _getNext100DayAnniversaryDate(event, now);
         return nextAnnualDate.isBefore(next100DayDate) ? nextAnnualDate : next100DayDate;
       case CalculationType.memory:
-        return event.date;
+        return event.startDate;
       default:
         return _getAnnualOccurrenceDate(event, now);
     }
   }
 
   static String _getMemoryCountdown(Event event, DateTime now, BuildContext context) {
-    final difference = event.date.difference(now);
+    final difference = event.startDate.difference(now);
     if (difference.isNegative) {
       return AppLocalizations.of(context)!.daysAgo(-difference.inDays);
     }
@@ -54,11 +54,11 @@ class CountdownCalculator {
 
     if (nextAnnualDate.isBefore(next100DayDate)) {
       nextMilestoneDate = nextAnnualDate;
-      final yearsPassed = nextAnnualDate.year - event.date.year;
+      final yearsPassed = nextAnnualDate.year - event.startDate.year;
       milestoneLabel = AppLocalizations.of(context)!.yearAnniversary(yearsPassed);
     } else {
       nextMilestoneDate = next100DayDate;
-      final daysPassed = nextMilestoneDate.difference(event.date).inDays;
+      final daysPassed = nextMilestoneDate.difference(event.startDate).inDays;
       milestoneLabel = AppLocalizations.of(context)!.dayAnniversary(daysPassed);
     }
 
@@ -67,7 +67,7 @@ class CountdownCalculator {
   }
 
   static DateTime _getAnnualOccurrenceDate(Event event, DateTime now) {
-    final eventDate = event.date;
+    final eventDate = event.startDate;
     DateTime nextOccurrence = DateTime(now.year, eventDate.month, eventDate.day);
 
     if (nextOccurrence.isBefore(now)) {
@@ -77,7 +77,7 @@ class CountdownCalculator {
   }
 
   static DateTime _getNextAnnualAnniversaryDate(Event event, DateTime now) {
-    final anniversaryStartDate = event.date;
+    final anniversaryStartDate = event.startDate;
     int yearsPassed = now.year - anniversaryStartDate.year;
 
     DateTime nextAnniversary = DateTime(anniversaryStartDate.year + yearsPassed, anniversaryStartDate.month, anniversaryStartDate.day);
@@ -90,12 +90,12 @@ class CountdownCalculator {
   }
 
   static DateTime _getNext100DayAnniversaryDate(Event event, DateTime now) {
-    final daysSince = now.difference(event.date).inDays;
+    final daysSince = now.difference(event.startDate).inDays;
     if (daysSince < 0) {
-      return event.date.add(const Duration(days: 100));
+      return event.startDate.add(const Duration(days: 100));
     }
 
     final next100DayMilestone = ((daysSince / 100).floor() + 1) * 100;
-    return event.date.add(Duration(days: next100DayMilestone));
+    return event.startDate.add(Duration(days: next100DayMilestone));
   }
 }

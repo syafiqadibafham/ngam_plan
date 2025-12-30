@@ -29,11 +29,19 @@ class SupabaseEventRepository implements EventRepository {
     print("MAp: $eventMap");
 
     try {
-      final response = await _supabaseClient.from('events').insert(eventMap);
+      final response = await _supabaseClient.from('events').insert({
+        "name": event.name,
+        "start_date": event.startDate.toUtc().toIso8601String(),
+        "end_date": event.endDate?.toUtc().toIso8601String(),
+        "owner_id": user.id,
+        "calculation_type": event.calculationType.toString().split('.').last,
+        "image_url": event.imageUrl,
+        "color_hex": event.colorHex,
+        "event_participants": [],
+      });
       print("Response: $response");
     } catch (e) {
       log('Error fetching events: $e');
-      rethrow;
     }
   }
 
@@ -45,7 +53,8 @@ class SupabaseEventRepository implements EventRepository {
   @override
   Future<List<Event>> getEvents() async {
     try {
-      final response = await _supabaseClient.from('events').select('id, name, date, owner_id, calculation_type, image_url, color_hex, event_participants(*)').order('date', ascending: true);
+      final response =
+          await _supabaseClient.from('events').select('id, name, start_date, end_date, owner_id, calculation_type, image_url, color_hex, event_participants(*)').order('start_date', ascending: true);
       return (response as List).map((e) => Event.fromJson(e)).toList();
     } catch (e) {
       log('Error fetching events: $e');

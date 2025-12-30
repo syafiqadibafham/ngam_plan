@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
-import 'package:ngam_plan/service_locator.dart';
 import 'package:ngam_plan/src/core/theme/app_colors.dart';
-import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:ngam_plan/src/core/theme/app_icons.dart';
 import 'package:ngam_plan/src/widgets/glass_widgets.dart';
 
 class EventsView extends StatefulWidget {
@@ -49,11 +48,11 @@ class _EventsViewState extends State<EventsView> {
                     child: GlassContainer(
                       padding: EdgeInsets.zero,
                       child: ListTile(
-                        leading: const Icon(LucideIcons.calendar),
+                        leading: const Icon(AppIcons.event),
                         title: Text(event.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                        subtitle: Text(event.date.toLocal().toString().split(' ')[0]),
+                        subtitle: Text(event.startDate.toLocal().toString().split(' ')[0]),
                         trailing: IconButton(
-                          icon: const Icon(LucideIcons.trash2, color: AppColors.error),
+                          icon: const Icon(AppIcons.delete, color: AppColors.error),
                           onPressed: () {
                             context.read<EventsCubit>().deleteEvent(event.id);
                           },

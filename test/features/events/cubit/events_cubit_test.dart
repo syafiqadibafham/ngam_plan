@@ -31,7 +31,7 @@ void main() {
         Event(
           id: '1',
           name: 'Test Event',
-          date: DateTime.now(),
+          startDate: DateTime.now(),
           calculationType: CalculationType.general,
         )
       ];
@@ -67,14 +67,14 @@ void main() {
       final event = Event(
         id: '2',
         name: 'New Event',
-        date: DateTime.now(),
+        startDate: DateTime.now(),
         calculationType: CalculationType.general,
       );
       final events = [
         Event(
           id: '1',
           name: 'Test Event',
-          date: DateTime.now(),
+          startDate: DateTime.now(),
           calculationType: CalculationType.general,
         ),
         event,
@@ -117,7 +117,7 @@ void main() {
         Event(
           id: '2',
           name: 'Another Event',
-          date: DateTime.now(),
+          startDate: DateTime.now(),
           calculationType: CalculationType.general,
         ),
       ];

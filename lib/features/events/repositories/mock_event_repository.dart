@@ -7,14 +7,14 @@ class MockEventRepository implements EventRepository {
     Event(
       id: '1',
       name: 'My Birthday',
-      date: DateTime(1997, 12, 18),
+      startDate: DateTime(1997, 12, 18),
       calculationType: CalculationType.birthday,
       //imageUrl: 'https://picsum.photos/seed/picsum/200/300',
     ),
     Event(
       id: '2',
       name: 'Wedding Anniversary',
-      date: DateTime(2024, 8, 24),
+      startDate: DateTime(2024, 8, 24),
       calculationType: CalculationType.anniversary,
       imageUrl: "https://picsum.photos/200/300",
     ),

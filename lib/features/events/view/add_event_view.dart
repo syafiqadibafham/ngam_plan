@@ -45,7 +45,7 @@ class _AddEventSheetState extends State<AddEventSheet> {
       final newEvent = Event(
         id: UniqueKey().toString(),
         name: _nameController.text,
-        date: _selectedDate!,
+        startDate: _selectedDate!,
         calculationType: _selectedType,
         imageUrl: _imageFile?.path,
       );

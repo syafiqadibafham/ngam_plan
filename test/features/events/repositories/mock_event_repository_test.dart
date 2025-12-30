@@ -20,7 +20,7 @@ void main() {
       final event = Event(
         id: '3',
         name: 'Test Event',
-        date: DateTime.now(),
+        startDate: DateTime.now(),
         calculationType: CalculationType.general,
       );
       await repository.addEvent(event);
@@ -32,7 +32,7 @@ void main() {
       final event = Event(
         id: '3',
         name: 'Test Event',
-        date: DateTime.now(),
+        startDate: DateTime.now(),
         calculationType: CalculationType.general,
       );
       await repository.addEvent(event);

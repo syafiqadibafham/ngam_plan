@@ -16,7 +16,10 @@ T _$identity<T>(T value) => value;
 mixin _$Event {
   String get id;
   String get name;
-  DateTime get date;
+  @JsonKey(name: 'start_date')
+  DateTime get startDate;
+  @JsonKey(name: 'end_date')
+  DateTime? get endDate;
   @JsonKey(name: 'calculation_type')
   CalculationType get calculationType;
   @JsonKey(name: 'image_url')
@@ -41,7 +44,9 @@ mixin _$Event {
             other is Event &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.date, date) || other.date == date) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.calculationType, calculationType) ||
                 other.calculationType == calculationType) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -52,12 +57,12 @@ mixin _$Event {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, date, calculationType, imageUrl, colorHex);
+  int get hashCode => Object.hash(runtimeType, id, name, startDate, endDate,
+      calculationType, imageUrl, colorHex);
 
   @override
   String toString() {
-    return 'Event(id: $id, name: $name, date: $date, calculationType: $calculationType, imageUrl: $imageUrl, colorHex: $colorHex)';
+    return 'Event(id: $id, name: $name, startDate: $startDate, endDate: $endDate, calculationType: $calculationType, imageUrl: $imageUrl, colorHex: $colorHex)';
   }
 }
 
@@ -69,7 +74,8 @@ abstract mixin class $EventCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      DateTime date,
+      @JsonKey(name: 'start_date') DateTime startDate,
+      @JsonKey(name: 'end_date') DateTime? endDate,
       @JsonKey(name: 'calculation_type') CalculationType calculationType,
       @JsonKey(name: 'image_url') String? imageUrl,
       @JsonKey(name: 'color_hex') String? colorHex});
@@ -89,7 +95,8 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? date = null,
+    Object? startDate = null,
+    Object? endDate = freezed,
     Object? calculationType = null,
     Object? imageUrl = freezed,
     Object? colorHex = freezed,
@@ -103,10 +110,14 @@ class _$EventCopyWithImpl<$Res> implements $EventCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _self.date
-          : date // ignore: cast_nullable_to_non_nullable
+      startDate: null == startDate
+          ? _self.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      endDate: freezed == endDate
+          ? _self.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       calculationType: null == calculationType
           ? _self.calculationType
           : calculationType // ignore: cast_nullable_to_non_nullable
@@ -219,7 +230,8 @@ extension EventPatterns on Event {
     TResult Function(
             String id,
             String name,
-            DateTime date,
+            @JsonKey(name: 'start_date') DateTime startDate,
+            @JsonKey(name: 'end_date') DateTime? endDate,
             @JsonKey(name: 'calculation_type') CalculationType calculationType,
             @JsonKey(name: 'image_url') String? imageUrl,
             @JsonKey(name: 'color_hex') String? colorHex)?
@@ -229,8 +241,8 @@ extension EventPatterns on Event {
     final _that = this;
     switch (_that) {
       case _Event() when $default != null:
-        return $default(_that.id, _that.name, _that.date, _that.calculationType,
-            _that.imageUrl, _that.colorHex);
+        return $default(_that.id, _that.name, _that.startDate, _that.endDate,
+            _that.calculationType, _that.imageUrl, _that.colorHex);
       case _:
         return orElse();
     }
@@ -254,7 +266,8 @@ extension EventPatterns on Event {
     TResult Function(
             String id,
             String name,
-            DateTime date,
+            @JsonKey(name: 'start_date') DateTime startDate,
+            @JsonKey(name: 'end_date') DateTime? endDate,
             @JsonKey(name: 'calculation_type') CalculationType calculationType,
             @JsonKey(name: 'image_url') String? imageUrl,
             @JsonKey(name: 'color_hex') String? colorHex)
@@ -263,8 +276,8 @@ extension EventPatterns on Event {
     final _that = this;
     switch (_that) {
       case _Event():
-        return $default(_that.id, _that.name, _that.date, _that.calculationType,
-            _that.imageUrl, _that.colorHex);
+        return $default(_that.id, _that.name, _that.startDate, _that.endDate,
+            _that.calculationType, _that.imageUrl, _that.colorHex);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -287,7 +300,8 @@ extension EventPatterns on Event {
     TResult? Function(
             String id,
             String name,
-            DateTime date,
+            @JsonKey(name: 'start_date') DateTime startDate,
+            @JsonKey(name: 'end_date') DateTime? endDate,
             @JsonKey(name: 'calculation_type') CalculationType calculationType,
             @JsonKey(name: 'image_url') String? imageUrl,
             @JsonKey(name: 'color_hex') String? colorHex)?
@@ -296,8 +310,8 @@ extension EventPatterns on Event {
     final _that = this;
     switch (_that) {
       case _Event() when $default != null:
-        return $default(_that.id, _that.name, _that.date, _that.calculationType,
-            _that.imageUrl, _that.colorHex);
+        return $default(_that.id, _that.name, _that.startDate, _that.endDate,
+            _that.calculationType, _that.imageUrl, _that.colorHex);
       case _:
         return null;
     }
@@ -310,7 +324,8 @@ class _Event extends Event {
   const _Event(
       {required this.id,
       required this.name,
-      required this.date,
+      @JsonKey(name: 'start_date') required this.startDate,
+      @JsonKey(name: 'end_date') this.endDate,
       @JsonKey(name: 'calculation_type') required this.calculationType,
       @JsonKey(name: 'image_url') this.imageUrl,
       @JsonKey(name: 'color_hex') this.colorHex})
@@ -322,7 +337,11 @@ class _Event extends Event {
   @override
   final String name;
   @override
-  final DateTime date;
+  @JsonKey(name: 'start_date')
+  final DateTime startDate;
+  @override
+  @JsonKey(name: 'end_date')
+  final DateTime? endDate;
   @override
   @JsonKey(name: 'calculation_type')
   final CalculationType calculationType;
@@ -355,7 +374,9 @@ class _Event extends Event {
             other is _Event &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.name, name) || other.name == name) &&
-            (identical(other.date, date) || other.date == date) &&
+            (identical(other.startDate, startDate) ||
+                other.startDate == startDate) &&
+            (identical(other.endDate, endDate) || other.endDate == endDate) &&
             (identical(other.calculationType, calculationType) ||
                 other.calculationType == calculationType) &&
             (identical(other.imageUrl, imageUrl) ||
@@ -366,12 +387,12 @@ class _Event extends Event {
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, id, name, date, calculationType, imageUrl, colorHex);
+  int get hashCode => Object.hash(runtimeType, id, name, startDate, endDate,
+      calculationType, imageUrl, colorHex);
 
   @override
   String toString() {
-    return 'Event(id: $id, name: $name, date: $date, calculationType: $calculationType, imageUrl: $imageUrl, colorHex: $colorHex)';
+    return 'Event(id: $id, name: $name, startDate: $startDate, endDate: $endDate, calculationType: $calculationType, imageUrl: $imageUrl, colorHex: $colorHex)';
   }
 }
 
@@ -384,7 +405,8 @@ abstract mixin class _$EventCopyWith<$Res> implements $EventCopyWith<$Res> {
   $Res call(
       {String id,
       String name,
-      DateTime date,
+      @JsonKey(name: 'start_date') DateTime startDate,
+      @JsonKey(name: 'end_date') DateTime? endDate,
       @JsonKey(name: 'calculation_type') CalculationType calculationType,
       @JsonKey(name: 'image_url') String? imageUrl,
       @JsonKey(name: 'color_hex') String? colorHex});
@@ -404,7 +426,8 @@ class __$EventCopyWithImpl<$Res> implements _$EventCopyWith<$Res> {
   $Res call({
     Object? id = null,
     Object? name = null,
-    Object? date = null,
+    Object? startDate = null,
+    Object? endDate = freezed,
     Object? calculationType = null,
     Object? imageUrl = freezed,
     Object? colorHex = freezed,
@@ -418,10 +441,14 @@ class __$EventCopyWithImpl<$Res> implements _$EventCopyWith<$Res> {
           ? _self.name
           : name // ignore: cast_nullable_to_non_nullable
               as String,
-      date: null == date
-          ? _self.date
-          : date // ignore: cast_nullable_to_non_nullable
+      startDate: null == startDate
+          ? _self.startDate
+          : startDate // ignore: cast_nullable_to_non_nullable
               as DateTime,
+      endDate: freezed == endDate
+          ? _self.endDate
+          : endDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       calculationType: null == calculationType
           ? _self.calculationType
           : calculationType // ignore: cast_nullable_to_non_nullable

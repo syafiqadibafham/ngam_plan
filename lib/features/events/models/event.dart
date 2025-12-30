@@ -10,7 +10,8 @@ abstract class Event with _$Event {
   const factory Event({
     required String id,
     required String name,
-    required DateTime date,
+    @JsonKey(name: 'start_date') required DateTime startDate,
+    @JsonKey(name: 'end_date') DateTime? endDate,
     @JsonKey(name: 'calculation_type') required CalculationType calculationType,
     @JsonKey(name: 'image_url') String? imageUrl,
     @JsonKey(name: 'color_hex') String? colorHex,
