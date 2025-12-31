@@ -82,9 +82,9 @@ class AppRouter {
         return loggingIn ? null : AppRoutes.login.path;
       }
 
-      if (loggingIn) {
-        return '/';
-      }
+      // if (loggingIn) {
+      //   return AppRoutes.home.path;
+      // }
 
       return null;
     },

@@ -17,8 +17,8 @@ class Button extends StatelessWidget {
           shape: RoundedSuperellipseBorder(
             borderRadius: BorderRadius.circular(30),
           ),
-          backgroundColor: Theme.of(context).colorScheme.primary,
-          foregroundColor: Theme.of(context).colorScheme.onPrimary,
+          backgroundColor: Theme.of(context).colorScheme.secondary,
+          foregroundColor: Theme.of(context).colorScheme.onSecondary,
         ),
         child: Text(label),
       ),

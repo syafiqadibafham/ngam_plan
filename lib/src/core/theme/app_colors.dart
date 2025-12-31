@@ -29,7 +29,7 @@ class AppColors {
   static const Color textSecondary = Color(0xB3404040); // 70% White
   static const Color textDisabled = Color.fromARGB(102, 0, 0, 0); // 40% White
   static const Color textOnPrimary = Color(0xFFFFFFFF);
-  static const Color textOnSecondary = Color(0xFFFFFFFF);
+  static const Color textOnSecondary = Color(0xB3404040);
 
   // Background colors (Legacy support)
   static const Color backgroundPrimary = Color(0xFF0F0728);

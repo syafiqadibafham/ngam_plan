@@ -5,10 +5,8 @@ import 'package:ngam_plan/core/routing/app_router.dart';
 import 'package:ngam_plan/features/auth/cubit/auth_cubit.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
 import 'package:ngam_plan/service_locator.dart';
-import 'package:ngam_plan/src/widgets/base_screen.dart';
 import 'package:ngam_plan/features/settings/cubit/settings_cubit.dart';
 import 'package:ngam_plan/features/settings/cubit/settings_state.dart';
-import 'package:ngam_plan/features/settings/view/settings_page.dart';
 import 'package:ngam_plan/src/core/theme/theme.dart';
 import 'package:ngam_plan/src/localization/app_localizations.dart';
 

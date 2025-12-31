@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ngam_plan/src/widgets/card.dart';
 
 class TextCard extends StatelessWidget {
   const TextCard({super.key, this.title, this.subtitle, this.subtitleColor, this.actionLabel, this.onActionPressed});
@@ -11,13 +12,7 @@ class TextCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: Theme.of(context).cardColor,
-        borderRadius: BorderRadius.circular(12),
-        //border: Border.all(color: AppColors.glassBorder),
-      ),
+    return ContainerCard(
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
