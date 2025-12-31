@@ -71,5 +71,19 @@
         "type": "int"
       }
     }
+  },
+  "calculationType": "Calculation Type",
+  "change": "Change",
+  "save": "Save",
+  "done": "Done",
+  "cancel": "Cancel",
+  "selectItem": "Select {item}",
+  "@selectItem": {
+    "description": "Label for the selection of a specific item",
+    "placeholders": {
+      "item": {
+        "type": "String"
+      }
+    }
   }
 }

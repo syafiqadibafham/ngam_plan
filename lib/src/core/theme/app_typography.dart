@@ -119,19 +119,19 @@ class AppTypography {
   static TextStyle get displayLarge => textTheme.displayLarge!;
   static TextStyle get displayMedium => textTheme.displayMedium!;
   static TextStyle get displaySmall => textTheme.displaySmall!;
-  
+
   static TextStyle get headlineLarge => textTheme.headlineLarge!;
   static TextStyle get headlineMedium => textTheme.headlineMedium!;
   static TextStyle get headlineSmall => textTheme.headlineSmall!;
-  
+
   static TextStyle get titleLarge => textTheme.titleLarge!;
   static TextStyle get titleMedium => textTheme.titleMedium!;
   static TextStyle get titleSmall => textTheme.titleSmall!;
-  
+
   static TextStyle get bodyLarge => textTheme.bodyLarge!;
   static TextStyle get bodyMedium => textTheme.bodyMedium!;
   static TextStyle get bodySmall => textTheme.bodySmall!;
-  
+
   static TextStyle get labelLarge => textTheme.labelLarge!;
   static TextStyle get labelMedium => textTheme.labelMedium!;
   static TextStyle get labelSmall => textTheme.labelSmall!;

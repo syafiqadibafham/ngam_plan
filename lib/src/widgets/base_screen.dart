@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ngam_plan/core/routing/app_routes.dart';
-import 'package:ngam_plan/features/events/view/add_event_view.dart';
 import 'package:ngam_plan/src/core/theme/app_icons.dart';
 import 'package:ngam_plan/features/events/view/events_view.dart';
 import 'package:ngam_plan/features/home/view/home_page.dart';
@@ -12,8 +11,6 @@ import 'package:ngam_plan/src/widgets/navigation_bar.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({super.key});
-
-  static const routeName = '/';
 
   @override
   State<BaseScreen> createState() => _BaseScreenState();
@@ -62,9 +59,10 @@ class _BaseScreenState extends State<BaseScreen> {
               alignment: Alignment.centerRight,
               child: FloatingActionButton(
                 onPressed: () {
-                  context.pushNamed(AppRoutes.addEvent.name).then((_) {
-                    setState(() {});
-                  });
+                  context.pushNamed(AppRoutes.addEvent.name);
+                  // .then((_) {
+                  //   setState(() {});
+                  // });
                 },
                 child: const Icon(AppIcons.add),
               ),

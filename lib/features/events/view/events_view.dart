@@ -45,14 +45,14 @@ class _EventsViewState extends State<EventsView> {
                   final event = events[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: GlassContainer(
-                      padding: EdgeInsets.zero,
+                    child: Card(
+                      color: Theme.of(context).colorScheme.surface,
                       child: ListTile(
                         leading: const Icon(AppIcons.event),
                         title: Text(event.name, style: const TextStyle(fontWeight: FontWeight.bold)),
                         subtitle: Text(event.startDate.toLocal().toString().split(' ')[0]),
                         trailing: IconButton(
-                          icon: const Icon(AppIcons.delete, color: AppColors.error),
+                          icon: Icon(AppIcons.delete, color: Theme.of(context).colorScheme.error),
                           onPressed: () {
                             context.read<EventsCubit>().deleteEvent(event.id);
                           },

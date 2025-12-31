@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:ngam_plan/src/core/theme/app_colors.dart';
-import 'package:ngam_plan/src/widgets/animated_background.dart';
 
 class AppScreen extends StatelessWidget {
   const AppScreen({
@@ -45,15 +44,20 @@ class AppScreen extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        gradient: RadialGradient(
+        gradient: LinearGradient(
           colors: [
             AppColors.backgroundStart,
             Theme.of(context).scaffoldBackgroundColor,
+            Theme.of(context).scaffoldBackgroundColor,
+            AppColors.backgroundEnd,
           ],
-          center: Alignment.topLeft,
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: const [0.0, 0.25, 0.75, 1.0],
         ),
       ),
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           foregroundColor: Theme.of(context).colorScheme.onSurface,
@@ -62,7 +66,7 @@ class AppScreen extends StatelessWidget {
           centerTitle: false,
           title: Text(
             title,
-            style: Theme.of(context).textTheme.headlineLarge,
+            style: Theme.of(context).textTheme.displayLarge,
           ),
         ),
         //floatingActionButton: floatingActionButton,

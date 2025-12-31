@@ -11,6 +11,7 @@ import 'package:ngam_plan/features/events/view/events_view.dart';
 import 'package:ngam_plan/features/settings/view/settings_page.dart';
 import 'package:ngam_plan/features/settings/view/update_profile_page.dart';
 import 'package:ngam_plan/src/widgets/base_screen.dart';
+import 'package:smooth_sheets/smooth_sheets.dart';
 
 class AppRouter {
   final AuthCubit authCubit;
@@ -30,7 +31,22 @@ class AppRouter {
             GoRoute(
               name: AppRoutes.addEvent.name,
               path: AppRoutes.addEvent.path,
-              builder: (context, state) => const AddEventSheet(),
+              pageBuilder: (context, state) {
+                // Use ModalSheetPage to show a modal sheet with Navigator 2.0.
+                // It works with any *Sheet provided by this package!
+                return ModalSheetPage(
+                  key: state.pageKey,
+                  // Enable the swipe-to-dismiss behavior.
+                  swipeDismissible: true,
+                  // Use `SwipeDismissSensitivity` to tweak the sensitivity of the swipe-to-dismiss behavior.
+                  swipeDismissSensitivity: const SwipeDismissSensitivity(
+                    minFlingVelocityRatio: 2.0,
+                    dismissalOffset: SheetOffset.proportionalToViewport(0.4),
+                  ),
+                  // You don't need a SheetViewport for the modal sheet.
+                  child: const AddEventPage(),
+                );
+              },
             ),
           ]),
           GoRoute(

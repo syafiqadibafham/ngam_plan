@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
-import 'package:ngam_plan/src/localization/app_localizations.dart';
-import 'package:ngam_plan/src/widgets/app_screen.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
 import 'package:ngam_plan/features/events/models/event.dart';

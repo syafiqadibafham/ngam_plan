@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:ngam_plan/core/config.dart';
 import 'package:ngam_plan/src/core/theme/app_colors.dart';
 import 'package:ngam_plan/src/core/theme/app_typography.dart';
 
@@ -17,7 +16,7 @@ class AppTheme {
       useMaterial3: true,
       brightness: Brightness.light,
       primaryColor: AppColors.primary,
-      scaffoldBackgroundColor: Colors.white, // Transparent to show gradient wallpaper
+      scaffoldBackgroundColor: Colors.grey[100], // Transparent to show gradient wallpaper
       textTheme: AppTypography.textTheme,
       fontFamily: 'Outfit', // Ensure font family is applied globally
       colorScheme: const ColorScheme.light(

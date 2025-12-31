@@ -14,20 +14,6 @@ class SupabaseEventRepository implements EventRepository {
     final user = _supabaseClient.auth.currentUser;
     if (user == null) throw Exception('Not authenticated');
 
-    // final response = await _supabaseClient.from('events').insert({
-    //   'name': event.name,
-    //   'date': event.date.toUtc().toIso8601String(),
-    //   'owner_id': user.id,
-    //   'event_type': event.type,
-    //   'color': event.colorHex,
-    //   'image_url': event.imageUrl,
-    // }).select().single();
-    final eventMap = event.toJson();
-    eventMap['owner_id'] = _supabaseClient.auth.currentUser!.id;
-    eventMap.removeWhere((key, value) => key == 'id');
-
-    print("MAp: $eventMap");
-
     try {
       final response = await _supabaseClient.from('events').insert({
         "name": event.name,
@@ -37,11 +23,12 @@ class SupabaseEventRepository implements EventRepository {
         "calculation_type": event.calculationType.toString().split('.').last,
         "image_url": event.imageUrl,
         "color_hex": event.colorHex,
-        "event_participants": [],
+        //"event_participants": [],
       });
       print("Response: $response");
     } catch (e) {
       log('Error fetching events: $e');
+      throw e;
     }
   }
 

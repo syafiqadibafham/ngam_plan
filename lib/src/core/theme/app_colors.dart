@@ -6,7 +6,7 @@ class AppColors {
 
   // Core Gradient Colors
   static const Color backgroundStart = Color(0xFFfabce3); // Deep Purple
-  static const Color backgroundEnd = Color.fromARGB(255, 255, 255, 255); // Darker Indigo
+  static const Color backgroundEnd = Color.fromARGB(255, 250, 241, 188); // Darker Indigo
   static const Color accentStart = Color(0xFF2980B9); // Fuchsia Pop
   static const Color accentEnd = Color(0xFF6DD5FA); // Indigo Blue
 

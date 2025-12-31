@@ -165,6 +165,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'{days}-day anniversary'**
   String dayAnniversary(int days);
+
+  /// No description provided for @calculationType.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation Type'**
+  String get calculationType;
+
+  /// No description provided for @change.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get change;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// No description provided for @done.
+  ///
+  /// In en, this message translates to:
+  /// **'Done'**
+  String get done;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// Label for the selection of a specific item
+  ///
+  /// In en, this message translates to:
+  /// **'Select {item}'**
+  String selectItem(String item);
 }
 
 class _AppLocalizationsDelegate

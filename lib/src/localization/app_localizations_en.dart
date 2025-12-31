@@ -53,4 +53,24 @@ class AppLocalizationsEn extends AppLocalizations {
   String dayAnniversary(int days) {
     return '$days-day anniversary';
   }
+
+  @override
+  String get calculationType => 'Calculation Type';
+
+  @override
+  String get change => 'Change';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get done => 'Done';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String selectItem(String item) {
+    return 'Select $item';
+  }
 }

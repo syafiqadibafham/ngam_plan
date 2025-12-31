@@ -2,23 +2,27 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:ngam_plan/core/routing/app_routes.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
 import 'package:ngam_plan/features/events/models/calculation_type_extension.dart';
 import 'package:ngam_plan/features/events/models/event.dart';
 import 'package:ngam_plan/features/events/models/calculation_types.dart';
+import 'package:ngam_plan/features/events/widgets/calculation_type_selector.dart';
 import 'package:ngam_plan/src/core/theme/app_colors.dart';
 import 'package:ngam_plan/src/widgets/app_screen.dart';
+import 'package:ngam_plan/src/widgets/button.dart';
 import 'package:ngam_plan/src/widgets/text_input.dart';
 
-class AddEventSheet extends StatefulWidget {
-  const AddEventSheet({super.key});
+class AddEventPage extends StatefulWidget {
+  const AddEventPage({super.key});
 
   @override
-  State<AddEventSheet> createState() => _AddEventSheetState();
+  State<AddEventPage> createState() => _AddEventPageState();
 }
 
-class _AddEventSheetState extends State<AddEventSheet> {
+class _AddEventPageState extends State<AddEventPage> {
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   DateTime? _selectedDate;
@@ -63,50 +67,80 @@ class _AddEventSheetState extends State<AddEventSheet> {
     }
   }
 
+  Future<bool?> showConfirmationDialog(BuildContext context) {
+    return showDialog<bool>(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: const Text('Are you sure?'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context, true),
+              child: const Text('Yes'),
+            ),
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text('No'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return AppScreen(
-      title: "Add New Event",
-      bottomWidget: SafeArea(
-        top: false,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: ElevatedButton(
-            onPressed: _saveEvent,
-            style: ElevatedButton.styleFrom(
-              minimumSize: const Size(double.infinity, 50),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-            ),
-            child: const Text('Save Event'),
-          ),
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, _) async {
+        if (!didPop) {
+          final shouldPop = await showConfirmationDialog(context);
+          if (shouldPop == true && context.mounted) {
+            context.goNamed(AppRoutes.home.name);
+          }
+        }
+      },
+      child: AppScreen(
+        title: "Add New Event",
+        bottomWidget: SafeArea(
+          top: false,
+          child: Button(label: "Add Event", onPressed: _saveEvent),
         ),
-      ),
-      child: Form(
-        key: _formKey,
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _buildImagePicker(),
-              const SizedBox(height: 16),
-              _buildEventTypeSelector(),
-              const SizedBox(height: 16),
-              TextInput(
-                controller: _nameController,
-                labelText: 'Event Name',
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter an event name';
-                  }
-                  return null;
-                },
-              ),
-              const SizedBox(height: 16),
-              _buildDatePicker(),
-            ],
+        child: Form(
+          key: _formKey,
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                _buildImagePicker(),
+                const SizedBox(height: 16),
+                CalculationTypeSelector(
+                    selectedCalculationType: _selectedType,
+                    onTypeSelected: (CalculationType type) {
+                      setState(() {
+                        _selectedType = type;
+                        // Reset selected date if it exceeds the new type's last date
+                        if (_selectedDate != null && _selectedDate!.isAfter(_selectedType.lastDate)) {
+                          _selectedDate = null;
+                        }
+                      });
+                    }),
+                const SizedBox(height: 16),
+                TextInput(
+                  controller: _nameController,
+                  labelText: 'Event Name',
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter an event name';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 16),
+                _buildDatePicker(),
+              ],
+            ),
           ),
         ),
       ),
@@ -178,29 +212,6 @@ class _AddEventSheetState extends State<AddEventSheet> {
             child: const Text('Choose Date'),
           ),
         ],
-      ),
-    );
-  }
-
-  Widget _buildEventTypeSelector() {
-    return DropdownButtonFormField<CalculationType>(
-      value: _selectedType,
-      onChanged: (CalculationType? newValue) {
-        if (newValue != null) {
-          setState(() {
-            _selectedType = newValue;
-          });
-        }
-      },
-      items: CalculationType.values.map((CalculationType type) {
-        return DropdownMenuItem<CalculationType>(
-          value: type,
-          child: Text(type.name[0].toUpperCase() + type.name.substring(1)),
-        );
-      }).toList(),
-      decoration: const InputDecoration(
-        labelText: 'Event Type',
-        border: OutlineInputBorder(),
       ),
     );
   }
