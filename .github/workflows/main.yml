@@ -1,0 +1,55 @@
+name: Build, Test and Release
+
+on:
+  push:
+    branches:
+      - main
+      - development
+
+jobs:
+  build:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.13.9'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Run tests
+        run: flutter test
+
+      - name: Increment version
+        run: |
+          chmod +x .github/scripts/increment_version.sh
+          .github/scripts/increment_version.sh
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Commit version bump
+        uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          commit_message: "chore: Bump version to ${{ env.NEW_VERSION }}"
+          branch: ${{ github.ref_name }}
+          file_pattern: pubspec.yaml
+          
+      - name: Create Tag
+        uses: rickstaa/action-create-tag@v1
+        with:
+          tag: "v${{ env.NEW_VERSION }}"
+          message: "Release v${{ env.NEW_VERSION }}"
+
+      - name: Create Release
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build/app/outputs/flutter-apk/app-release.apk"
+          tag: "v${{ env.NEW_VERSION }}"
+          token: ${{ secrets.GITHUB_TOKEN }}
