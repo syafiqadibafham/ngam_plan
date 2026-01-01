@@ -15,16 +15,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '3.13.9'
+      - name: Set up FVM
+        uses: leoafarias/fvm-action@v1
 
       - name: Install dependencies
-        run: flutter pub get
+        run: fvm flutter pub get
 
       - name: Run tests
-        run: flutter test
+        run: fvm flutter test
 
       - name: Increment version
         run: |
@@ -32,7 +30,7 @@ jobs:
           .github/scripts/increment_version.sh
 
       - name: Build APK
-        run: flutter build apk --release
+        run: fvm flutter build apk --release
 
       - name: Commit version bump
         uses: stefanzweifel/git-auto-commit-action@v4
