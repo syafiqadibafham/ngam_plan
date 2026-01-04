@@ -201,6 +201,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Select {item}'**
   String selectItem(String item);
+
+  /// No description provided for @year.
+  ///
+  /// In en, this message translates to:
+  /// **'Year'**
+  String get year;
+
+  /// No description provided for @month.
+  ///
+  /// In en, this message translates to:
+  /// **'Month'**
+  String get month;
+
+  /// No description provided for @day.
+  ///
+  /// In en, this message translates to:
+  /// **'Day'**
+  String get day;
+
+  /// No description provided for @hour.
+  ///
+  /// In en, this message translates to:
+  /// **'Hour'**
+  String get hour;
+
+  /// No description provided for @minute.
+  ///
+  /// In en, this message translates to:
+  /// **'Minute'**
+  String get minute;
+
+  /// No description provided for @second.
+  ///
+  /// In en, this message translates to:
+  /// **'Second'**
+  String get second;
 }
 
 class _AppLocalizationsDelegate

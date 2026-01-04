@@ -4,6 +4,7 @@ enum AppRoutes {
 
   home('home', '/'),
   events('events', '/events'),
+  event('event', '/event'),
   addEvent('add-event', 'add-event'),
   editEvent('edit-event', 'edit-event'),
   settings('settings', '/settings'),

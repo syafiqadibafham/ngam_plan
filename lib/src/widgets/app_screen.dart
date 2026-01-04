@@ -9,6 +9,7 @@ class AppScreen extends StatelessWidget {
     this.floatingActionButton,
     this.bottomWidget,
     this.includeBackground = false,
+    this.topRightWidgets,
   });
 
   final String title;
@@ -16,6 +17,7 @@ class AppScreen extends StatelessWidget {
   final Widget? floatingActionButton;
   final Widget? bottomWidget;
   final bool includeBackground;
+  final List<Widget>? topRightWidgets;
 
   @override
   Widget build(BuildContext context) {
@@ -68,6 +70,7 @@ class AppScreen extends StatelessWidget {
             title,
             style: Theme.of(context).textTheme.displayLarge,
           ),
+          actions: topRightWidgets,
         ),
         //floatingActionButton: floatingActionButton,
         body: Padding(

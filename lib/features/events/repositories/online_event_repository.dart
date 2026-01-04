@@ -53,4 +53,19 @@ class SupabaseEventRepository implements EventRepository {
   Future<void> updateEvent(Event event) async {
     await _supabaseClient.from('events').update(event.toJson()).eq('id', event.id);
   }
+
+  @override
+  Future<Event> getEvent(String eventId) async {
+    try {
+      final response = await _supabaseClient
+          .from('events')
+          .select('id, name, start_date, end_date, owner_id, calculation_type, image_url, color_hex, event_participants(*)')
+          .eq('id', eventId)
+          .single();
+      return Event.fromJson(response);
+    } catch (e) {
+      log('Error fetching event: $e');
+      rethrow;
+    }
+  }
 }

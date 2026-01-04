@@ -73,4 +73,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String selectItem(String item) {
     return 'Select $item';
   }
+
+  @override
+  String get year => 'Year';
+
+  @override
+  String get month => 'Month';
+
+  @override
+  String get day => 'Day';
+
+  @override
+  String get hour => 'Hour';
+
+  @override
+  String get minute => 'Minute';
+
+  @override
+  String get second => 'Second';
 }

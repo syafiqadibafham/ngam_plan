@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
+import 'package:ngam_plan/core/routing/app_routes.dart';
+import 'package:ngam_plan/features/countdown/models/countdown.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
-import 'package:ngam_plan/src/core/theme/app_colors.dart';
+import 'package:ngam_plan/features/events/models/event_extension.dart';
 import 'package:ngam_plan/src/core/theme/app_icons.dart';
-import 'package:ngam_plan/src/widgets/glass_widgets.dart';
+import 'package:ngam_plan/src/widgets/card.dart';
+import 'package:ngam_plan/features/countdown/widgets/countdown_counter.dart';
 
 class EventsView extends StatefulWidget {
   const EventsView({super.key});
@@ -45,17 +49,26 @@ class _EventsViewState extends State<EventsView> {
                   final event = events[index];
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
-                    child: Card(
-                      color: Theme.of(context).colorScheme.surface,
-                      child: ListTile(
-                        leading: const Icon(AppIcons.event),
-                        title: Text(event.name, style: const TextStyle(fontWeight: FontWeight.bold)),
-                        subtitle: Text(event.startDate.toLocal().toString().split(' ')[0]),
-                        trailing: IconButton(
-                          icon: Icon(AppIcons.delete, color: Theme.of(context).colorScheme.error),
-                          onPressed: () {
-                            context.read<EventsCubit>().deleteEvent(event.id);
-                          },
+                    child: GestureDetector(
+                      onTap: () => context.pushNamed(AppRoutes.event.name, pathParameters: {'id': event.id}),
+                      child: ContainerCard(
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          spacing: 10,
+                          children: [
+                            const Icon(AppIcons.event),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(event.name, style: const TextStyle(fontWeight: FontWeight.bold)),
+                                  Text(event.startDate.toLocal().toString().split(' ')[0]),
+                                ],
+                              ),
+                            ),
+                            CountdownCounter(countdown: Countdown.fromDateTime(event.upcomingDate))
+                          ],
+                          //Icon(AppIcons.right, color: Theme.of(context).disabledColor),
                         ),
                       ),
                     ),

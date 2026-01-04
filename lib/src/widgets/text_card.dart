@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:ngam_plan/src/widgets/card.dart';
 
 class TextCard extends StatelessWidget {
-  const TextCard({super.key, this.title, this.subtitle, this.subtitleColor, this.actionLabel, this.onActionPressed});
+  const TextCard({super.key, this.title, this.subtitle, this.subtitleColor, this.actionLabel, this.onActionPressed, this.isLoading = false});
 
   final String? title;
   final String? subtitle;
   final Color? subtitleColor;
   final String? actionLabel;
   final VoidCallback? onActionPressed;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
     return ContainerCard(
+      isLoading: isLoading,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [

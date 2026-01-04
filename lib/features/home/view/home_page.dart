@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:ngam_plan/features/events/models/events_extension.dart';
+import 'package:ngam_plan/features/home/widgets/events_home_widget.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
 import 'package:ngam_plan/features/events/models/event.dart';
@@ -66,25 +68,7 @@ class _HomePageState extends State<HomePage> {
 
                       Padding(
                         padding: const EdgeInsets.only(top: 12, bottom: 100), // Bottom padding for navbar
-                        child: ListView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            final sortedEvents = _getSortedEvents(events);
-                            if (index >= sortedEvents.length) return null;
-                            final event = sortedEvents[index];
-
-                            // Skip the first one if it's shown in Hero?
-                            // Logic: Show all in list or skip?
-                            // "Overview of all events" implies all. I'll show all, maybe mark the first one?
-                            // For now, simple list.
-                            return Padding(
-                              padding: const EdgeInsets.only(bottom: 12),
-                              child: EventHomeWidget(event: event),
-                            ).animate().fadeIn(delay: (50 * index).ms).slideY(begin: 0.1, end: 0);
-                          },
-                          itemCount: events.length,
-                        ),
+                        child: EvenstHomeWidget(events: events),
                       ),
                     ],
                   ),
@@ -98,10 +82,6 @@ class _HomePageState extends State<HomePage> {
   Event _getNextEvent(List<Event> events) {
     final sorted = List.of(events)..sort((a, b) => a.upcomingDate.compareTo(b.upcomingDate));
     return sorted.first;
-  }
-
-  List<Event> _getSortedEvents(List<Event> events) {
-    return List.of(events)..sort((a, b) => a.upcomingDate.compareTo(b.upcomingDate));
   }
 }
 

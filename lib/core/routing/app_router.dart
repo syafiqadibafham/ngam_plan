@@ -7,6 +7,7 @@ import 'package:ngam_plan/features/auth/cubit/auth_cubit.dart';
 import 'package:ngam_plan/features/auth/view/login_page.dart';
 import 'package:ngam_plan/features/auth/view/register_page.dart';
 import 'package:ngam_plan/features/events/view/add_event_view.dart';
+import 'package:ngam_plan/features/events/view/event_view.dart';
 import 'package:ngam_plan/features/events/view/events_view.dart';
 import 'package:ngam_plan/features/settings/view/settings_page.dart';
 import 'package:ngam_plan/features/settings/view/update_profile_page.dart';
@@ -48,6 +49,14 @@ class AppRouter {
                 );
               },
             ),
+            GoRoute(
+              path: "${AppRoutes.events.path}/:id",
+              name: AppRoutes.event.name,
+              builder: (context, state) {
+                final eventId = state.pathParameters['id']!;
+                return EventView(eventId: eventId);
+              },
+            )
           ]),
           GoRoute(
             name: AppRoutes.settings.name,

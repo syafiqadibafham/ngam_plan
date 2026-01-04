@@ -46,4 +46,10 @@ class MockEventRepository implements EventRepository {
     await Future.delayed(const Duration(seconds: 1));
     _events.removeWhere((event) => event.id == eventId);
   }
+
+  @override
+  Future<Event> getEvent(String eventId) async {
+    await Future.delayed(const Duration(seconds: 1));
+    return Future.value(_events.firstWhere((event) => event.id == eventId));
+  }
 }

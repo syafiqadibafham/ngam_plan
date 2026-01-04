@@ -8,4 +8,5 @@ class AppIcons {
   static const IconData home = LucideIcons.house;
   static const IconData settings = LucideIcons.settings;
   static const IconData timer = LucideIcons.timer;
+  static const IconData right = LucideIcons.chevronRight;
 }
