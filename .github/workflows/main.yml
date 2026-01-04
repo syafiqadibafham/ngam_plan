@@ -17,6 +17,10 @@ jobs:
 
       - name: Set up FVM
         uses: kuhnroyal/flutter-fvm-config-action/setup@v3
+        with:
+          post-setup-script: |
+            echo "Setup done!"
+            dart pub global activate fvm
 
       - name: Install dependencies
         run: fvm flutter pub get
