@@ -7,10 +7,10 @@ import 'package:ngam_plan/src/widgets/text_card.dart';
 import 'package:smooth_sheets/smooth_sheets.dart';
 
 class CalculationTypeSelector extends StatelessWidget {
-  const CalculationTypeSelector({super.key, required this.selectedCalculationType, required this.onTypeSelected});
+  const CalculationTypeSelector({super.key, required this.selectedCalculationType, required this.onDone});
 
   final CalculationType selectedCalculationType;
-  final Function(CalculationType type) onTypeSelected;
+  final Function(CalculationType type) onDone;
 
   @override
   Widget build(BuildContext context) {
@@ -19,17 +19,31 @@ class CalculationTypeSelector extends StatelessWidget {
         subtitle: selectedCalculationType.name[0].toUpperCase() + selectedCalculationType.name.substring(1),
         actionLabel: AppLocalizations.of(context)!.change,
         onActionPressed: () {
-          AppHelpers.showBottomSheet(context, child: _CalculationTypeSheet(onTypeSelected: onTypeSelected));
+          AppHelpers.showBottomSheet(context, child: _CalculationTypeSheet(value: selectedCalculationType, onDone: onDone));
         });
   }
 }
 
-class _CalculationTypeSheet extends StatelessWidget {
-  _CalculationTypeSheet({required this.onTypeSelected});
+class _CalculationTypeSheet extends StatefulWidget {
+  _CalculationTypeSheet({this.value, required this.onDone});
 
-  final Function(CalculationType type) onTypeSelected;
+  final CalculationType? value;
+  final Function(CalculationType type) onDone;
 
+  @override
+  State<_CalculationTypeSheet> createState() => _CalculationTypeSheetState();
+}
+
+class _CalculationTypeSheetState extends State<_CalculationTypeSheet> {
   final ValueNotifier<CalculationType> selectedTypeNotifier = ValueNotifier<CalculationType>(CalculationType.general);
+
+  @override
+  void initState() {
+    super.initState();
+    if (widget.value != null) {
+      selectedTypeNotifier.value = widget.value!;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +101,19 @@ class _CalculationTypeSheet extends StatelessWidget {
                   Button(
                       label: AppLocalizations.of(context)!.done,
                       onPressed: () {
-                        onTypeSelected(value);
-                        Navigator.of(context).pop();
+                        try {
+                          widget.onDone(value);
+                          if (!context.mounted) return;
+                          Navigator.of(context).pop();
+                        } catch (e) {
+                          if (!context.mounted) return;
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('Failed to save selection: $e'),
+                              backgroundColor: Theme.of(context).colorScheme.error,
+                            ),
+                          );
+                        }
                       })
                 ],
               ),

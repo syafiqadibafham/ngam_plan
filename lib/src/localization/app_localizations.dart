@@ -237,6 +237,42 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Second'**
   String get second;
+
+  /// No description provided for @eventNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Name'**
+  String get eventNameLabel;
+
+  /// No description provided for @startDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Start Date'**
+  String get startDateLabel;
+
+  /// No description provided for @endDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'End Date'**
+  String get endDateLabel;
+
+  /// No description provided for @nextOccurrenceLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Next Occurrence'**
+  String get nextOccurrenceLabel;
+
+  /// No description provided for @calculationTypeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Calculation Type'**
+  String get calculationTypeLabel;
+
+  /// No description provided for @eventDetailsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Event Details'**
+  String get eventDetailsTitle;
 }
 
 class _AppLocalizationsDelegate

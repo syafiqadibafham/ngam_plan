@@ -91,4 +91,22 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get second => 'Second';
+
+  @override
+  String get eventNameLabel => 'Event Name';
+
+  @override
+  String get startDateLabel => 'Start Date';
+
+  @override
+  String get endDateLabel => 'End Date';
+
+  @override
+  String get nextOccurrenceLabel => 'Next Occurrence';
+
+  @override
+  String get calculationTypeLabel => 'Calculation Type';
+
+  @override
+  String get eventDetailsTitle => 'Event Details';
 }

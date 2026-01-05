@@ -20,4 +20,15 @@ class EventDetailCubit extends Cubit<EventDetailState> {
       emit(EventDetailState.error(e.toString()));
     }
   }
+
+  Future<void> updateEvent(Event updatedEvent) async {
+    emit(const EventDetailState.loading());
+    try {
+      //final updatedEvent = oldEvent.copyWith(name: newName);
+      await _eventRepository.updateEvent(updatedEvent);
+      emit(EventDetailState.loaded(updatedEvent));
+    } catch (e) {
+      emit(EventDetailState.error(e.toString()));
+    }
+  }
 }

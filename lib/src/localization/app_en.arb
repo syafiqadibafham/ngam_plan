@@ -91,5 +91,11 @@
   "day": "Day",
   "hour": "Hour",
   "minute": "Minute",
-  "second": "Second"
+  "second": "Second",
+  "eventNameLabel": "Event Name",
+  "startDateLabel": "Start Date",
+  "endDateLabel": "End Date",
+  "nextOccurrenceLabel": "Next Occurrence",
+  "calculationTypeLabel": "Calculation Type",
+  "eventDetailsTitle": "Event Details"
 }

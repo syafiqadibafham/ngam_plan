@@ -1,20 +1,54 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:ngam_plan/features/countdown/models/countdown.dart';
-import 'package:ngam_plan/features/countdown/models/countdown_extension.dart';
+import 'package:ngam_plan/features/countdown/models/duration_extension.dart';
 
-class CountdownCounter extends StatelessWidget {
-  const CountdownCounter({super.key, required this.countdown});
+class CountdownCounter extends StatefulWidget {
+  const CountdownCounter({super.key, required this.eventDate});
 
-  final Countdown countdown;
+  final DateTime eventDate;
+
+  @override
+  State<CountdownCounter> createState() => _CountdownCounterState();
+}
+
+class _CountdownCounterState extends State<CountdownCounter> {
+  late Timer _timer;
+  late Duration _countdown;
+
+  @override
+  void initState() {
+    super.initState();
+    _updateCountdown();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      _updateCountdown();
+    });
+  }
+
+  void _updateCountdown() {
+    if (!mounted) return;
+    setState(() {
+      _countdown = widget.eventDate.difference(DateTime.now());
+    });
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final countdownList = countdown.toList();
-    final labels = countdown.labels(context);
-    final startLabel = countdownList.indexWhere((value) => value != 0);
+    final isLessThanADay = _countdown.days <= 1;
+    final labels = isLessThanADay ? _countdown.timeLabels(context) : _countdown.dateLabels(context);
+    final date = [_countdown.years, _countdown.months, _countdown.days];
+    final time = [_countdown.hours, _countdown.minutes, _countdown.seconds];
+    final countdownList = isLessThanADay ? time : date;
     return Row(
+      mainAxisSize: MainAxisSize.min,
       children: [
-        for (var i = startLabel; i < (3 + startLabel); i++) ...[
+        for (var i = 0; i < 3; i++) ...[
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
             child: _ValueAndLabel(value: countdownList[i].toString(), label: labels[i]),
@@ -26,7 +60,7 @@ class CountdownCounter extends StatelessWidget {
 }
 
 class _ValueAndLabel extends StatelessWidget {
-  const _ValueAndLabel({super.key, required this.value, required this.label});
+  const _ValueAndLabel({required this.value, required this.label});
 
   final String value;
   final String label;
@@ -54,7 +88,6 @@ class _ValueAndLabel extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.surface,
                     ))
-            // Additional countdown logic and UI here
           ],
         ),
       ),

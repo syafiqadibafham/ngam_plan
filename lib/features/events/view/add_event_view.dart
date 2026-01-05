@@ -117,7 +117,7 @@ class _AddEventPageState extends State<AddEventPage> {
                 const SizedBox(height: 16),
                 CalculationTypeSelector(
                     selectedCalculationType: _selectedType,
-                    onTypeSelected: (CalculationType type) {
+                    onDone: (CalculationType type) {
                       setState(() {
                         _selectedType = type;
                         // Reset selected date if it exceeds the new type's last date

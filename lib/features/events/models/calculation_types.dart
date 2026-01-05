@@ -3,5 +3,6 @@ enum CalculationType {
   anniversary,
   holiday,
   memory,
+  range,
   general,
 }

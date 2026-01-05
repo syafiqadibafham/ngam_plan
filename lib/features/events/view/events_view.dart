@@ -66,7 +66,7 @@ class _EventsViewState extends State<EventsView> {
                                 ],
                               ),
                             ),
-                            CountdownCounter(countdown: Countdown.fromDateTime(event.upcomingDate))
+                            CountdownCounter(eventDate: event.upcomingDate)
                           ],
                           //Icon(AppIcons.right, color: Theme.of(context).disabledColor),
                         ),

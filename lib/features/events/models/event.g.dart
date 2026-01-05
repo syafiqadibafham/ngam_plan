@@ -34,5 +34,6 @@ const _$CalculationTypeEnumMap = {
   CalculationType.anniversary: 'anniversary',
   CalculationType.holiday: 'holiday',
   CalculationType.memory: 'memory',
+  CalculationType.range: 'range',
   CalculationType.general: 'general',
 };

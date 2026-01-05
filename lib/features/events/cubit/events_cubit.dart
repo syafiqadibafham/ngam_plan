@@ -30,6 +30,17 @@ class EventsCubit extends Cubit<EventsState> {
     }
   }
 
+  Future<void> updateEvent(Event updatedEvent) async {
+    emit(const EventsState.loading());
+    try {
+      //final updatedEvent = oldEvent.copyWith(name: newName);
+      await _eventRepository.updateEvent(updatedEvent);
+      await fetchEvents();
+    } catch (e) {
+      emit(EventsState.error(e.toString()));
+    }
+  }
+
   Future<void> deleteEvent(String eventId) async {
     try {
       await _eventRepository.deleteEvent(eventId);

@@ -13,103 +13,78 @@ part of 'countdown.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$Countdown {
-  int get year;
-  int get month;
-  int get day;
-  int get hours;
-  int get minutes;
-  int get seconds;
+mixin _$CountdownResult {
+  String get milestoneLabel;
+  Duration get duration;
 
-  /// Create a copy of Countdown
+  /// Create a copy of CountdownResult
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $CountdownCopyWith<Countdown> get copyWith =>
-      _$CountdownCopyWithImpl<Countdown>(this as Countdown, _$identity);
+  $CountdownResultCopyWith<CountdownResult> get copyWith =>
+      _$CountdownResultCopyWithImpl<CountdownResult>(
+          this as CountdownResult, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is Countdown &&
-            (identical(other.year, year) || other.year == year) &&
-            (identical(other.month, month) || other.month == month) &&
-            (identical(other.day, day) || other.day == day) &&
-            (identical(other.hours, hours) || other.hours == hours) &&
-            (identical(other.minutes, minutes) || other.minutes == minutes) &&
-            (identical(other.seconds, seconds) || other.seconds == seconds));
+            other is CountdownResult &&
+            (identical(other.milestoneLabel, milestoneLabel) ||
+                other.milestoneLabel == milestoneLabel) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, year, month, day, hours, minutes, seconds);
+  int get hashCode => Object.hash(runtimeType, milestoneLabel, duration);
 
   @override
   String toString() {
-    return 'Countdown(year: $year, month: $month, day: $day, hours: $hours, minutes: $minutes, seconds: $seconds)';
+    return 'CountdownResult(milestoneLabel: $milestoneLabel, duration: $duration)';
   }
 }
 
 /// @nodoc
-abstract mixin class $CountdownCopyWith<$Res> {
-  factory $CountdownCopyWith(Countdown value, $Res Function(Countdown) _then) =
-      _$CountdownCopyWithImpl;
+abstract mixin class $CountdownResultCopyWith<$Res> {
+  factory $CountdownResultCopyWith(
+          CountdownResult value, $Res Function(CountdownResult) _then) =
+      _$CountdownResultCopyWithImpl;
   @useResult
-  $Res call(
-      {int year, int month, int day, int hours, int minutes, int seconds});
+  $Res call({String milestoneLabel, Duration duration});
 }
 
 /// @nodoc
-class _$CountdownCopyWithImpl<$Res> implements $CountdownCopyWith<$Res> {
-  _$CountdownCopyWithImpl(this._self, this._then);
+class _$CountdownResultCopyWithImpl<$Res>
+    implements $CountdownResultCopyWith<$Res> {
+  _$CountdownResultCopyWithImpl(this._self, this._then);
 
-  final Countdown _self;
-  final $Res Function(Countdown) _then;
+  final CountdownResult _self;
+  final $Res Function(CountdownResult) _then;
 
-  /// Create a copy of Countdown
+  /// Create a copy of CountdownResult
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? year = null,
-    Object? month = null,
-    Object? day = null,
-    Object? hours = null,
-    Object? minutes = null,
-    Object? seconds = null,
+    Object? milestoneLabel = null,
+    Object? duration = null,
   }) {
     return _then(_self.copyWith(
-      year: null == year
-          ? _self.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int,
-      month: null == month
-          ? _self.month
-          : month // ignore: cast_nullable_to_non_nullable
-              as int,
-      day: null == day
-          ? _self.day
-          : day // ignore: cast_nullable_to_non_nullable
-              as int,
-      hours: null == hours
-          ? _self.hours
-          : hours // ignore: cast_nullable_to_non_nullable
-              as int,
-      minutes: null == minutes
-          ? _self.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      seconds: null == seconds
-          ? _self.seconds
-          : seconds // ignore: cast_nullable_to_non_nullable
-              as int,
+      milestoneLabel: null == milestoneLabel
+          ? _self.milestoneLabel
+          : milestoneLabel // ignore: cast_nullable_to_non_nullable
+              as String,
+      duration: null == duration
+          ? _self.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
     ));
   }
 }
 
-/// Adds pattern-matching-related methods to [Countdown].
-extension CountdownPatterns on Countdown {
+/// Adds pattern-matching-related methods to [CountdownResult].
+extension CountdownResultPatterns on CountdownResult {
   /// A variant of `map` that fallback to returning `orElse`.
   ///
   /// It is equivalent to doing:
@@ -124,12 +99,12 @@ extension CountdownPatterns on Countdown {
 
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>(
-    TResult Function(_Countdown value)? $default, {
+    TResult Function(_CountdownResult value)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _Countdown() when $default != null:
+      case _CountdownResult() when $default != null:
         return $default(_that);
       case _:
         return orElse();
@@ -151,11 +126,11 @@ extension CountdownPatterns on Countdown {
 
   @optionalTypeArgs
   TResult map<TResult extends Object?>(
-    TResult Function(_Countdown value) $default,
+    TResult Function(_CountdownResult value) $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Countdown():
+      case _CountdownResult():
         return $default(_that);
       case _:
         throw StateError('Unexpected subclass');
@@ -176,11 +151,11 @@ extension CountdownPatterns on Countdown {
 
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>(
-    TResult? Function(_Countdown value)? $default,
+    TResult? Function(_CountdownResult value)? $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Countdown() when $default != null:
+      case _CountdownResult() when $default != null:
         return $default(_that);
       case _:
         return null;
@@ -201,16 +176,13 @@ extension CountdownPatterns on Countdown {
 
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>(
-    TResult Function(
-            int year, int month, int day, int hours, int minutes, int seconds)?
-        $default, {
+    TResult Function(String milestoneLabel, Duration duration)? $default, {
     required TResult orElse(),
   }) {
     final _that = this;
     switch (_that) {
-      case _Countdown() when $default != null:
-        return $default(_that.year, _that.month, _that.day, _that.hours,
-            _that.minutes, _that.seconds);
+      case _CountdownResult() when $default != null:
+        return $default(_that.milestoneLabel, _that.duration);
       case _:
         return orElse();
     }
@@ -231,15 +203,12 @@ extension CountdownPatterns on Countdown {
 
   @optionalTypeArgs
   TResult when<TResult extends Object?>(
-    TResult Function(
-            int year, int month, int day, int hours, int minutes, int seconds)
-        $default,
+    TResult Function(String milestoneLabel, Duration duration) $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Countdown():
-        return $default(_that.year, _that.month, _that.day, _that.hours,
-            _that.minutes, _that.seconds);
+      case _CountdownResult():
+        return $default(_that.milestoneLabel, _that.duration);
       case _:
         throw StateError('Unexpected subclass');
     }
@@ -259,15 +228,12 @@ extension CountdownPatterns on Countdown {
 
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>(
-    TResult? Function(
-            int year, int month, int day, int hours, int minutes, int seconds)?
-        $default,
+    TResult? Function(String milestoneLabel, Duration duration)? $default,
   ) {
     final _that = this;
     switch (_that) {
-      case _Countdown() when $default != null:
-        return $default(_that.year, _that.month, _that.day, _that.hours,
-            _that.minutes, _that.seconds);
+      case _CountdownResult() when $default != null:
+        return $default(_that.milestoneLabel, _that.duration);
       case _:
         return null;
     }
@@ -276,116 +242,79 @@ extension CountdownPatterns on Countdown {
 
 /// @nodoc
 
-class _Countdown extends Countdown {
-  const _Countdown(
-      {required this.year,
-      required this.month,
-      required this.day,
-      required this.hours,
-      required this.minutes,
-      required this.seconds})
+class _CountdownResult extends CountdownResult {
+  const _CountdownResult({required this.milestoneLabel, required this.duration})
       : super._();
 
   @override
-  final int year;
+  final String milestoneLabel;
   @override
-  final int month;
-  @override
-  final int day;
-  @override
-  final int hours;
-  @override
-  final int minutes;
-  @override
-  final int seconds;
+  final Duration duration;
 
-  /// Create a copy of Countdown
+  /// Create a copy of CountdownResult
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$CountdownCopyWith<_Countdown> get copyWith =>
-      __$CountdownCopyWithImpl<_Countdown>(this, _$identity);
+  _$CountdownResultCopyWith<_CountdownResult> get copyWith =>
+      __$CountdownResultCopyWithImpl<_CountdownResult>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _Countdown &&
-            (identical(other.year, year) || other.year == year) &&
-            (identical(other.month, month) || other.month == month) &&
-            (identical(other.day, day) || other.day == day) &&
-            (identical(other.hours, hours) || other.hours == hours) &&
-            (identical(other.minutes, minutes) || other.minutes == minutes) &&
-            (identical(other.seconds, seconds) || other.seconds == seconds));
+            other is _CountdownResult &&
+            (identical(other.milestoneLabel, milestoneLabel) ||
+                other.milestoneLabel == milestoneLabel) &&
+            (identical(other.duration, duration) ||
+                other.duration == duration));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, year, month, day, hours, minutes, seconds);
+  int get hashCode => Object.hash(runtimeType, milestoneLabel, duration);
 
   @override
   String toString() {
-    return 'Countdown(year: $year, month: $month, day: $day, hours: $hours, minutes: $minutes, seconds: $seconds)';
+    return 'CountdownResult(milestoneLabel: $milestoneLabel, duration: $duration)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$CountdownCopyWith<$Res>
-    implements $CountdownCopyWith<$Res> {
-  factory _$CountdownCopyWith(
-          _Countdown value, $Res Function(_Countdown) _then) =
-      __$CountdownCopyWithImpl;
+abstract mixin class _$CountdownResultCopyWith<$Res>
+    implements $CountdownResultCopyWith<$Res> {
+  factory _$CountdownResultCopyWith(
+          _CountdownResult value, $Res Function(_CountdownResult) _then) =
+      __$CountdownResultCopyWithImpl;
   @override
   @useResult
-  $Res call(
-      {int year, int month, int day, int hours, int minutes, int seconds});
+  $Res call({String milestoneLabel, Duration duration});
 }
 
 /// @nodoc
-class __$CountdownCopyWithImpl<$Res> implements _$CountdownCopyWith<$Res> {
-  __$CountdownCopyWithImpl(this._self, this._then);
+class __$CountdownResultCopyWithImpl<$Res>
+    implements _$CountdownResultCopyWith<$Res> {
+  __$CountdownResultCopyWithImpl(this._self, this._then);
 
-  final _Countdown _self;
-  final $Res Function(_Countdown) _then;
+  final _CountdownResult _self;
+  final $Res Function(_CountdownResult) _then;
 
-  /// Create a copy of Countdown
+  /// Create a copy of CountdownResult
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? year = null,
-    Object? month = null,
-    Object? day = null,
-    Object? hours = null,
-    Object? minutes = null,
-    Object? seconds = null,
+    Object? milestoneLabel = null,
+    Object? duration = null,
   }) {
-    return _then(_Countdown(
-      year: null == year
-          ? _self.year
-          : year // ignore: cast_nullable_to_non_nullable
-              as int,
-      month: null == month
-          ? _self.month
-          : month // ignore: cast_nullable_to_non_nullable
-              as int,
-      day: null == day
-          ? _self.day
-          : day // ignore: cast_nullable_to_non_nullable
-              as int,
-      hours: null == hours
-          ? _self.hours
-          : hours // ignore: cast_nullable_to_non_nullable
-              as int,
-      minutes: null == minutes
-          ? _self.minutes
-          : minutes // ignore: cast_nullable_to_non_nullable
-              as int,
-      seconds: null == seconds
-          ? _self.seconds
-          : seconds // ignore: cast_nullable_to_non_nullable
-              as int,
+    return _then(_CountdownResult(
+      milestoneLabel: null == milestoneLabel
+          ? _self.milestoneLabel
+          : milestoneLabel // ignore: cast_nullable_to_non_nullable
+              as String,
+      duration: null == duration
+          ? _self.duration
+          : duration // ignore: cast_nullable_to_non_nullable
+              as Duration,
     ));
   }
 }
