@@ -3,12 +3,13 @@ import 'package:ngam_plan/src/core/theme/app_colors.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ContainerCard extends StatelessWidget {
-  const ContainerCard({super.key, required this.child, this.isLoading = false, this.width, this.height});
+  const ContainerCard({super.key, required this.child, this.isLoading = false, this.width, this.height, this.backgroundColor});
 
   final Widget child;
   final bool isLoading;
   final double? width;
   final double? height;
+  final Color? backgroundColor;
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class ContainerCard extends StatelessWidget {
       return Container(
         padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
         decoration: BoxDecoration(
-          color: Theme.of(context).cardColor,
+          color: backgroundColor ?? Theme.of(context).cardColor,
           borderRadius: BorderRadius.circular(12),
           //border: Border.all(color: AppColors.glassBorder),
         ),

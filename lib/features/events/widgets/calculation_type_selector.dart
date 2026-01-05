@@ -76,6 +76,7 @@ class _CalculationTypeSheetState extends State<_CalculationTypeSheet> {
                       selected: isSelected,
                       selectedColor: Theme.of(context).colorScheme.primary,
                       tileColor: Theme.of(context).cardColor,
+                      leading: Text(type.emoji),
                       titleTextStyle: isSelected
                           ? TextStyle(
                               color: Theme.of(context).colorScheme.primary,

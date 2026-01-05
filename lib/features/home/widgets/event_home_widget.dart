@@ -18,6 +18,7 @@ class EventHomeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final countdown = CountdownCalculator.getCountdown(event, context);
     return GestureDetector(
       onTap: () {
         onTap?.call();
@@ -118,7 +119,7 @@ class EventHomeWidget extends StatelessWidget {
                         Icon(LucideIcons.hourglass, size: 14, color: Theme.of(context).colorScheme.primary),
                         const SizedBox(width: 4),
                         Text(
-                          CountdownCalculator.getCountdownString(event, context),
+                          countdown.milestoneLabel,
                           style: Theme.of(context).textTheme.labelSmall?.copyWith(
                                 color: Theme.of(context).colorScheme.primary,
                                 fontWeight: FontWeight.bold,

@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:lucide_icons_flutter/lucide_icons.dart';
+import 'package:ngam_plan/features/countdown/widgets/countdown_counter.dart';
 import 'package:ngam_plan/features/home/widgets/events_home_widget.dart';
+import 'package:ngam_plan/src/widgets/card.dart';
 import 'package:shimmer/shimmer.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
 import 'package:ngam_plan/features/events/models/event.dart';
@@ -66,7 +68,7 @@ class _HomePageState extends State<HomePage> {
 
                       Padding(
                         padding: const EdgeInsets.only(top: 12, bottom: 100), // Bottom padding for navbar
-                        child: EvenstHomeWidget(events: events),
+                        child: EventsHomeWidget(events: events),
                       ),
                     ],
                   ),
@@ -102,7 +104,7 @@ class _HeroEventCardState extends State<_HeroEventCard> {
     // Transform logic
     final double rotationX = _isTouching ? (_touchPosition.dy - 100) / 100 * -0.1 : 0; // constrained
     final double rotationY = _isTouching ? (_touchPosition.dx - 150) / 150 * 0.1 : 0;
-
+    final countdown = CountdownCalculator.getCountdown(widget.event, context);
     return Listener(
       onPointerDown: (details) {
         setState(() {
@@ -135,38 +137,51 @@ class _HeroEventCardState extends State<_HeroEventCard> {
             child: child,
           );
         },
-        child: GlassContainer(
-          height: 200,
-          width: double.infinity,
-          padding: const EdgeInsets.all(20),
-          borderRadius: BorderRadius.circular(24),
-          backgroundColor: Theme.of(context).colorScheme.surface, // Highlight for Hero
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(LucideIcons.zap, size: 40, color: Theme.of(context).colorScheme.secondary)
-                  .animate(onPlay: (c) => c.repeat(reverse: true))
-                  .scale(begin: const Offset(1, 1), end: const Offset(1.2, 1.2)),
-              const SizedBox(height: 16),
-              Text(
-                widget.event.name,
-                style: Theme.of(context).textTheme.headlineMedium,
-                textAlign: TextAlign.center,
-              ),
-              const SizedBox(height: 8),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                decoration: BoxDecoration(
-                  color: AppColors.glassBorder,
-                  borderRadius: BorderRadius.circular(20),
+        child: Stack(
+          alignment: Alignment.bottomRight,
+          children: [
+            ContainerCard(
+              //height: 200,
+              width: double.infinity,
+              backgroundColor: Theme.of(context).colorScheme.tertiary,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  spacing: 8,
+                  children: [
+                    Text(
+                      countdown.milestoneLabel,
+                      style: Theme.of(context).textTheme.headlineMedium,
+                      textAlign: TextAlign.center,
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.secondary,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        widget.event.name,
+                        style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
+                      ),
+                    ),
+                    CountdownCounter(eventDate: widget.event.upcomingDate),
+                  ],
                 ),
-                child: Text(
-                  CountdownCalculator.getCountdownString(widget.event, context),
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Theme.of(context).colorScheme.onSurface),
-                ),
               ),
-            ],
-          ),
+            ),
+            Positioned(
+              bottom: -22,
+              right: 10,
+              child: Text(
+                widget.event.calculationType.emoji,
+                style: const TextStyle(fontSize: 90),
+              ),
+            )
+            //.animate(onPlay: (c) => c.repeat(reverse: true)).scale(begin: const Offset(1, 1), end: const Offset(1.2, 1.2)),
+          ],
         ),
       ),
     );

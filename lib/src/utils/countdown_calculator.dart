@@ -42,6 +42,10 @@ class CountdownCalculator {
   }
 
   static CountdownResult _calculateMemoryCountdown(Event event, DateTime now) {
+    // If the event is today, the countdown should be zero.
+    if (DateUtils.isSameDay(event.startDate, now)) {
+      return CountdownResult(milestoneLabel: event.name, duration: Duration.zero);
+    }
     return CountdownResult(
       milestoneLabel: event.name,
       duration: event.startDate.difference(now),
@@ -50,6 +54,12 @@ class CountdownCalculator {
 
   static CountdownResult _calculateAnnualCountdown(Event event, DateTime now, BuildContext context) {
     final nextOccurrence = _getAnnualOccurrenceDate(event, now);
+
+    // If the event is today, the countdown should be zero until the day passes.
+    if (DateUtils.isSameDay(nextOccurrence, now)) {
+      return CountdownResult(milestoneLabel: event.name, duration: Duration.zero);
+    }
+
     final difference = nextOccurrence.difference(now);
     return CountdownResult(milestoneLabel: event.name, duration: difference);
   }
@@ -63,12 +73,17 @@ class CountdownCalculator {
 
     if (nextAnnualDate.isBefore(next100DayDate)) {
       nextMilestoneDate = nextAnnualDate;
-      final yearsPassed = nextAnnualDate.year - event.startDate.year;
+      final yearsPassed = nextMilestoneDate.year - event.startDate.year;
       milestoneLabel = AppLocalizations.of(context)!.yearAnniversary(yearsPassed);
     } else {
       nextMilestoneDate = next100DayDate;
       final daysPassed = nextMilestoneDate.difference(event.startDate).inDays;
       milestoneLabel = AppLocalizations.of(context)!.dayAnniversary(daysPassed);
+    }
+
+    // If the milestone is today, the countdown should be zero until the day passes.
+    if (DateUtils.isSameDay(nextMilestoneDate, now)) {
+      return CountdownResult(milestoneLabel: milestoneLabel, duration: Duration.zero);
     }
 
     final difference = nextMilestoneDate.difference(now);
@@ -78,8 +93,10 @@ class CountdownCalculator {
   static DateTime _getAnnualOccurrenceDate(Event event, DateTime now) {
     final eventDate = event.startDate;
     DateTime nextOccurrence = DateTime(now.year, eventDate.month, eventDate.day);
-
-    if (nextOccurrence.isBefore(now)) {
+    
+    final today = DateTime(now.year, now.month, now.day);
+    // If the date has already passed this year, set it to next year.
+    if (nextOccurrence.isBefore(today)) {
       nextOccurrence = DateTime(now.year + 1, eventDate.month, eventDate.day);
     }
     return nextOccurrence;
@@ -90,8 +107,10 @@ class CountdownCalculator {
     int yearsPassed = now.year - anniversaryStartDate.year;
 
     DateTime nextAnniversary = DateTime(anniversaryStartDate.year + yearsPassed, anniversaryStartDate.month, anniversaryStartDate.day);
-
-    if (nextAnniversary.isBefore(now)) {
+    
+    final today = DateTime(now.year, now.month, now.day);
+    // If the anniversary has already passed this year, set it to next year.
+    if (nextAnniversary.isBefore(today)) {
       yearsPassed++;
       nextAnniversary = DateTime(anniversaryStartDate.year + yearsPassed, anniversaryStartDate.month, anniversaryStartDate.day);
     }

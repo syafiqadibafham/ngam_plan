@@ -11,8 +11,10 @@ import 'package:ngam_plan/features/events/models/event.dart';
 import 'package:ngam_plan/features/events/models/calculation_types.dart';
 import 'package:ngam_plan/features/events/widgets/calculation_type_selector.dart';
 import 'package:ngam_plan/src/core/theme/app_colors.dart';
+import 'package:ngam_plan/src/localization/app_localizations.dart';
 import 'package:ngam_plan/src/widgets/app_screen.dart';
 import 'package:ngam_plan/src/widgets/button.dart';
+import 'package:ngam_plan/src/widgets/date_selector.dart';
 import 'package:ngam_plan/src/widgets/text_input.dart';
 
 class AddEventPage extends StatefulWidget {
@@ -138,7 +140,7 @@ class _AddEventPageState extends State<AddEventPage> {
                   },
                 ),
                 const SizedBox(height: 16),
-                _buildDatePicker(),
+                DateSelector(label: AppLocalizations.of(context)!.startDateLabel, selectedDate: _selectedDate, selectedCalculationType: _selectedType),
               ],
             ),
           ),
@@ -176,42 +178,6 @@ class _AddEventPageState extends State<AddEventPage> {
                 )
               : null,
         ),
-      ),
-    );
-  }
-
-  Widget _buildDatePicker() {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-      decoration: BoxDecoration(
-        color: AppColors.glassSurface,
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: AppColors.glassBorder),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(
-            _selectedDate == null ? 'No date chosen' : 'Date: ${_selectedDate!.toLocal().toString().split(' ')[0]}',
-            style: const TextStyle(color: AppColors.textPrimary),
-          ),
-          TextButton(
-            onPressed: () async {
-              final pickedDate = await showDatePicker(
-                context: context,
-                initialDate: _selectedDate ?? DateTime.now(),
-                firstDate: DateTime(1900),
-                lastDate: _selectedType.lastDate,
-              );
-              if (pickedDate != null) {
-                setState(() {
-                  _selectedDate = pickedDate;
-                });
-              }
-            },
-            child: const Text('Choose Date'),
-          ),
-        ],
       ),
     );
   }

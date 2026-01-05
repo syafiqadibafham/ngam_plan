@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:ngam_plan/core/routing/app_routes.dart';
-import 'package:ngam_plan/features/countdown/models/countdown.dart';
 import 'package:ngam_plan/features/events/cubit/events_cubit.dart';
 import 'package:ngam_plan/features/events/models/event_extension.dart';
 import 'package:ngam_plan/src/core/theme/app_icons.dart';

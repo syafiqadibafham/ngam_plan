@@ -4,8 +4,8 @@ import 'package:ngam_plan/features/events/models/event_extension.dart';
 import 'package:ngam_plan/features/events/models/events_extension.dart';
 import 'package:ngam_plan/features/home/widgets/event_home_widget.dart';
 
-class EvenstHomeWidget extends StatelessWidget {
-  const EvenstHomeWidget({super.key, required this.events});
+class EventsHomeWidget extends StatelessWidget {
+  const EventsHomeWidget({super.key, required this.events});
 
   final List<Event> events;
 

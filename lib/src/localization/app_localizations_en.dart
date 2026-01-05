@@ -109,4 +109,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get eventDetailsTitle => 'Event Details';
+
+  @override
+  String get today => 'Today';
 }

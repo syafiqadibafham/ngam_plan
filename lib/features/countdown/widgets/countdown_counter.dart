@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:ngam_plan/features/countdown/models/duration_extension.dart';
+import 'package:ngam_plan/src/localization/app_localizations.dart';
 
 class CountdownCounter extends StatefulWidget {
   const CountdownCounter({super.key, required this.eventDate});
@@ -40,18 +41,33 @@ class _CountdownCounterState extends State<CountdownCounter> {
 
   @override
   Widget build(BuildContext context) {
-    final isLessThanADay = _countdown.days <= 1;
-    final labels = isLessThanADay ? _countdown.timeLabels(context) : _countdown.dateLabels(context);
-    final date = [_countdown.years, _countdown.months, _countdown.days];
-    final time = [_countdown.hours, _countdown.minutes, _countdown.seconds];
-    final countdownList = isLessThanADay ? time : date;
+    if (DateUtils.isSameDay(widget.eventDate, DateTime.now())) {
+      return Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.onSurface,
+          borderRadius: BorderRadius.circular(5.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            AppLocalizations.of(context)!.today,
+            style: Theme.of(context).textTheme.headlineLarge?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Theme.of(context).colorScheme.surface,
+                ),
+          ),
+        ),
+      );
+    }
+    final countdownList = _countdown.filteredValueAndLabelist(context);
+
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        for (var i = 0; i < 3; i++) ...[
+        for (var item in countdownList) ...[
           Padding(
             padding: const EdgeInsets.only(left: 8.0),
-            child: _ValueAndLabel(value: countdownList[i].toString(), label: labels[i]),
+            child: _ValueAndLabel(value: item.value.toString(), label: item.label),
           ),
         ],
       ],

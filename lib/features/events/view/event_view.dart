@@ -17,6 +17,7 @@ import 'package:ngam_plan/src/utils/countdown_calculator.dart';
 import 'package:ngam_plan/src/widgets/app_screen.dart';
 import 'package:ngam_plan/src/widgets/button.dart';
 import 'package:ngam_plan/src/widgets/card.dart';
+import 'package:ngam_plan/src/widgets/date_selector.dart';
 import 'package:ngam_plan/src/widgets/text_card.dart';
 import 'package:ngam_plan/src/widgets/text_input.dart';
 import 'package:smooth_sheets/smooth_sheets.dart';
@@ -78,23 +79,34 @@ class _EventViewState extends State<EventView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               spacing: 10,
               children: [
-                if (event == null)
+                if (!isLoading && event == null)
                   ContainerCard(child: Text("Event not found."))
                 else ...[
-                  ContainerCard(
-                      width: double.infinity,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 10),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          spacing: 10,
-                          children: [
-                            Text(countdownString, style: Theme.of(context).textTheme.headlineMedium),
-                            CountdownCounter(eventDate: event!.upcomingDate),
-                          ],
-                        ),
-                      )),
+                  if (event != null)
+                    ContainerCard(
+                        width: double.infinity,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            spacing: 10,
+                            children: [
+                              Text(countdownString, style: Theme.of(context).textTheme.headlineMedium),
+                              CountdownCounter(eventDate: event!.upcomingDate),
+                            ],
+                          ),
+                        )),
+                  if (event != null)
+                    CalculationTypeSelector(
+                      selectedCalculationType: event!.calculationType,
+                      onDone: (value) async {
+                        if (event == null) return;
+                        event = event!.copyWith(calculationType: value);
+                        await context.read<EventsCubit>().updateEvent(event!);
+                        await context.read<EventDetailCubit>().fetchEvent(event!.id);
+                      },
+                    ),
                   TextCard(
                     isLoading: isLoading,
                     title: AppLocalizations.of(context)!.eventNameLabel,
@@ -106,17 +118,24 @@ class _EventViewState extends State<EventView> {
                           controller: _nameController,
                           onDone: (_) async {
                             if (event == null) return;
-                            event = event!.copyWith(name: _nameController.text);
+                            event = event?.copyWith(name: _nameController.text);
                             await context.read<EventsCubit>().updateEvent(event!);
                             await context.read<EventDetailCubit>().fetchEvent(event!.id);
                           },
                         )),
                   ),
-                  TextCard(
-                    isLoading: isLoading,
-                    title: AppLocalizations.of(context)!.startDateLabel,
-                    subtitle: Jiffy.parseFromDateTime(event!.startDate.toLocal()).format(pattern: "dd MMM yyyy"),
-                  ),
+                  if (event != null)
+                    DateSelector(
+                      label: AppLocalizations.of(context)!.startDateLabel,
+                      selectedDate: event?.startDate,
+                      selectedCalculationType: event!.calculationType,
+                      onDateChanged: (date) async {
+                        if (event == null) return;
+                        event = event?.copyWith(startDate: date);
+                        await context.read<EventsCubit>().updateEvent(event!);
+                        await context.read<EventDetailCubit>().fetchEvent(event!.id);
+                      },
+                    ),
                   if (event != null && event!.calculationType == CalculationType.range)
                     TextCard(
                       isLoading: isLoading,
@@ -126,16 +145,7 @@ class _EventViewState extends State<EventView> {
                   TextCard(
                     isLoading: isLoading,
                     title: AppLocalizations.of(context)!.nextOccurrenceLabel,
-                    subtitle: Jiffy.parseFromDateTime(event!.upcomingDate.toLocal()).format(pattern: "dd MMM yyyy"),
-                  ),
-                  CalculationTypeSelector(
-                    selectedCalculationType: event!.calculationType,
-                    onDone: (value) async {
-                      if (event == null) return;
-                      event = event!.copyWith(calculationType: value);
-                      await context.read<EventsCubit>().updateEvent(event!);
-                      await context.read<EventDetailCubit>().fetchEvent(event!.id);
-                    },
+                    subtitle: event == null ? "" : Jiffy.parseFromDateTime(event!.upcomingDate.toLocal()).format(pattern: "dd MMM yyyy"),
                   ),
                 ]
               ],
