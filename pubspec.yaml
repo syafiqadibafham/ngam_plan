@@ -1,13 +1,14 @@
 name: ngam_plan
-description: "A new Flutter project."
+description: "An application to track your important events like anniversaries,
+  birthdays, and more. Never miss an important date again!"
 
 # Prevent accidental publishing to pub.dev.
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.2+1
 
 environment:
-  sdk: '>=3.3.1 <4.0.0'
+  sdk: ">=3.3.1 <4.0.0"
 
 dependencies:
   cached_network_image: ^3.4.1

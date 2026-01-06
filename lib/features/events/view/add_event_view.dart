@@ -140,7 +140,12 @@ class _AddEventPageState extends State<AddEventPage> {
                   },
                 ),
                 const SizedBox(height: 16),
-                DateSelector(label: AppLocalizations.of(context)!.startDateLabel, selectedDate: _selectedDate, selectedCalculationType: _selectedType),
+                DateSelector(
+                  label: AppLocalizations.of(context)!.startDateLabel,
+                  selectedDate: _selectedDate,
+                  selectedCalculationType: _selectedType,
+                  onDateChanged: (date) => setState(() => _selectedDate = date),
+                ),
               ],
             ),
           ),
